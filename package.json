@@ -1,0 +1,26 @@
+{
+  "name": "sharqatna-app",
+  "displayName": "شرقاطنا",
+  "version": "5.1.0",
+  "description": "دليل سواق الشرقاط - تطبيق محلي يجمع سواق الشرقاط بمكان واحد",
+  "author": "Hamad Al-Nazzar",
+  "private": true,
+  "scripts": {
+    "build:icons": "node scripts/build-icons.js",
+    "cap:init": "npx cap init sharqatna com.sharqatna.app --web-dir www",
+    "cap:add": "npx cap add android",
+    "cap:sync": "npx cap sync android",
+    "cap:open": "npx cap open android",
+    "build:apk": "cd android && chmod +x gradlew && ./gradlew assembleDebug",
+    "build:release": "cd android && ./gradlew assembleRelease"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/core": "^6.2.0",
+    "onesignal-cordova-plugin": "^5.2.7"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0",
+    "sharp": "^0.33.5"
+  }
+}
