@@ -1,20 +1,68 @@
-name: Jekyll site CI
+name: Build Sharqatna APK
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
+    paths:
+      - 'www/**'
+      - 'package.json'
+      - 'capacitor.config.json'
+  workflow_dispatch:
 
 jobs:
   build:
-
+    name: Build Android APK
     runs-on: ubuntu-latest
-
+    
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the site in the jekyll/builder container
-      run: |
-        docker run \
-        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/builder:latest /bin/bash -c "chmod -R 777 /srv/jekyll && jekyll build --future"
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: ☕ Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: 🔧 Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 📱 Add Android platform
+        run: |
+          npx cap add android || echo "Android platform already exists"
+
+      - name: 🔄 Sync Capacitor
+        run: npx cap sync android
+
+      - name: 🔐 Accept Android licenses
+        run: |
+          yes | sdkmanager --licenses || true
+
+      - name: 🏗️ Build debug APK
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: 📤 Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sharqatna-debug-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: 📊 Build summary
+        if: success()
+        run: |
+          echo "✅ تم بناء APK بنجاح" >> $GITHUB_STEP_SUMMARY
+          echo "📦 حجم الملف: $(du -h android/app/build/outputs/apk/debug/app-debug.apk | cut -f1)" >> $GITHUB_STEP_SUMMARY
