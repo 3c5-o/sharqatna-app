@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#172554">
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/jpeg" href="https://j.top4top.io/p_3868kjtjj1.jpg">
+<link rel="apple-touch-icon" href="https://j.top4top.io/p_3868kjtjj1.jpg">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="شرقاطنا">
+
+<title>شرقاطنا | دليل سواق الشرقاط</title>
+
+<!-- OneSignal Push -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "017ed702-163e-41f6-9dbc-50e2aa29c926",
+      safari_web_id: "web.onesignal.auto.186ea02a-f890-410a-b109-aa22c180382d",
+      notifyButton: { enable: false }
+    });
+  });
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+    --navy: #172554; --primary: #1E3A8A; --primary-light: #3B82F6;
+    --gold: #F59E0B; --gold-light: #FBBF24;
+    --bg: #F4F6FB; --card: #FFFFFF; --text: #1F2937; --muted: #64748B; --line: #E5EAF3;
+    --green: #10B981; --red: #EF4444;
+    --shadow: 0 4px 15px rgba(23,37,84,0.07); --shadow-lg: 0 12px 30px rgba(23,37,84,0.14);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body { background: #DDE3EF; color: var(--text); }
+.app { max-width: 520px; margin: 0 auto; min-height: 100vh; background: var(--bg); position: relative; box-shadow: 0 0 50px rgba(23,37,84,0.2); padding-bottom: 100px; }
+
+#splash { position: fixed; inset: 0; z-index: 9999; background: linear-gradient(160deg, var(--navy) 0%, var(--primary) 60%, var(--primary-light) 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.7s ease, visibility 0.7s; }
+#splash.hide { opacity: 0; visibility: hidden; }
+.splash-logo { width: 116px; height: 116px; background: white; border-radius: 30px; overflow: hidden; padding: 6px; box-shadow: 0 20px 50px rgba(0,0,0,0.35); animation: pop 0.9s cubic-bezier(0.34,1.56,0.64,1); margin-bottom: 25px; }
+.splash-logo img { width: 100%; height: 100%; object-fit: cover; border-radius: 24px; }
+@keyframes pop { from { transform: scale(0) rotate(-90deg); } to { transform: scale(1) rotate(0); } }
+#splash h1 { color: white; font-size: 40px; font-weight: 900; letter-spacing: 1px; animation: rise 0.8s 0.2s both; }
+#splash p { color: rgba(255,255,255,0.85); font-weight: 600; font-size: 15px; margin: 6px 0 35px; animation: rise 0.8s 0.35s both; }
+@keyframes rise { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+.splash-bar { width: 180px; height: 4px; background: rgba(255,255,255,0.2); border-radius: 10px; overflow: hidden; }
+.splash-bar::after { content: ''; display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 10px; animation: load 2s ease forwards; }
+@keyframes load { to { width: 100%; } }
+
+.header { position: sticky; top: 0; z-index: 100; background: linear-gradient(135deg, var(--navy) 0%, var(--primary) 100%); padding: 18px 20px 20px; border-radius: 0 0 26px 26px; box-shadow: var(--shadow-lg); }
+.header-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-icon { width: 46px; height: 46px; background: white; border-radius: 14px; overflow: hidden; padding: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+.brand-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+.brand h1 { color: white; font-size: 20px; font-weight: 900; line-height: 1.1; }
+.brand p { color: rgba(255,255,255,0.75); font-size: 11px; font-weight: 600; }
+.header-actions { display: flex; align-items: center; gap: 8px; }
+.live-badge { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); padding: 7px 12px; border-radius: 30px; color: white; font-size: 11px; font-weight: 700; }
+.live-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; animation: pulse 1.6s infinite; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); } 50% { box-shadow: 0 0 0 6px rgba(16,185,129,0); } }
+.bell-btn { position: relative; width: 40px; height: 40px; border-radius: 12px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 16px; cursor: pointer; }
+.bell-badge { position: absolute; top: -6px; left: -6px; min-width: 18px; height: 18px; background: var(--red); border-radius: 10px; color: white; font-size: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; padding: 0 4px; }
+
+.page { display: none; padding: 18px 16px; animation: pageIn 0.35s ease; }
+.page.active { display: block; }
+@keyframes pageIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+.section-head { display: flex; justify-content: space-between; align-items: center; margin: 22px 2px 12px; }
+.section-title { font-size: 16px; font-weight: 900; color: var(--navy); display: flex; align-items: center; gap: 8px; }
+.section-title i { color: var(--gold); font-size: 15px; }
+.see-all { background: none; border: none; color: var(--primary-light); font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+
+.info-card { margin-top: 16px; background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border: 1.5px solid rgba(245,158,11,0.4); border-radius: 20px; padding: 16px; display: flex; align-items: center; gap: 13px; box-shadow: var(--shadow); }
+.info-icon { width: 52px; height: 52px; background: white; border-radius: 15px; overflow: hidden; padding: 4px; flex-shrink: 0; box-shadow: 0 5px 14px rgba(245,158,11,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 22px; }
+.info-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 11px; }
+.info-text { flex: 1; }
+.info-text h3 { font-size: 14.5px; font-weight: 900; color: #92400E; }
+.info-text p { font-size: 11.5px; color: #A16207; font-weight: 700; }
+.info-btn { background: linear-gradient(135deg, var(--navy), var(--primary)); color: white; border: none; padding: 11px 18px; border-radius: 13px; font-size: 12.5px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 7px; font-family: 'Cairo', sans-serif; box-shadow: 0 6px 16px rgba(23,37,84,0.3); flex-shrink: 0; }
+.info-btn:active { transform: scale(0.96); }
+
+.join-cta { margin-top: 16px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 20px; padding: 16px; display: flex; align-items: center; gap: 13px; cursor: pointer; box-shadow: 0 8px 20px rgba(245,158,11,0.35); transition: 0.3s; }
+.join-cta:active { transform: scale(0.98); }
+.join-cta-icon { width: 50px; height: 50px; background: white; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 21px; flex-shrink: 0; }
+.join-cta-text { flex: 1; }
+.join-cta-text h3 { font-size: 15px; font-weight: 900; color: #78350F; }
+.join-cta-text p { font-size: 11.5px; color: #92400E; font-weight: 700; }
+.join-arrow { color: #78350F; font-size: 14px; }
+
+.hero { margin-top: 16px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); border-radius: 22px; padding: 22px; color: white; position: relative; overflow: hidden; box-shadow: var(--shadow-lg); }
+.hero::before { content: ''; position: absolute; left: -40px; top: -40px; width: 160px; height: 160px; border-radius: 50%; background: radial-gradient(circle, rgba(245,158,11,0.35), transparent 70%); }
+.hero::after { content: '\f5e4'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 18px; bottom: -18px; font-size: 90px; color: rgba(255,255,255,0.1); transform: rotate(-8deg); }
+.hero h2 { font-size: 21px; font-weight: 900; margin-bottom: 6px; position: relative; }
+.hero p { font-size: 13px; opacity: 0.9; font-weight: 600; position: relative; max-width: 80%; }
+
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+.mini-stat { background: var(--card); border-radius: 16px; padding: 14px 8px; text-align: center; box-shadow: var(--shadow); border: 1px solid var(--line); }
+.mini-stat i { font-size: 19px; color: var(--gold); margin-bottom: 6px; }
+.mini-stat h3 { font-size: 20px; font-weight: 900; color: var(--navy); line-height: 1; }
+.mini-stat p { font-size: 10.5px; color: var(--muted); font-weight: 700; margin-top: 4px; }
+
+.h-scroll { display: flex; gap: 12px; overflow-x: auto; padding: 4px 2px 12px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.h-scroll::-webkit-scrollbar { display: none; }
+.top-card { min-width: 210px; scroll-snap-align: start; background: var(--card); border-radius: 18px; padding: 16px; box-shadow: var(--shadow); border: 1px solid var(--line); position: relative; overflow: hidden; cursor: pointer; transition: 0.3s; }
+.top-card:active { transform: scale(0.97); }
+.top-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+.rank-badge { position: absolute; top: 12px; left: 12px; width: 30px; height: 30px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 13px; }
+.rb-1 { background: linear-gradient(135deg, #F59E0B, #D97706); }
+.rb-2 { background: linear-gradient(135deg, #94A3B8, #64748B); }
+.rb-3 { background: linear-gradient(135deg, #B45309, #92400E); }
+.top-avatar { width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(135deg, var(--navy), var(--primary-light)); color: white; font-size: 22px; font-weight: 900; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+.top-card h4 { font-size: 14px; font-weight: 800; margin-bottom: 2px; }
+.top-card .car-line { font-size: 11.5px; color: var(--muted); font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.stars { color: var(--gold); font-size: 11px; display: flex; gap: 2px; align-items: center; }
+.stars .num { color: var(--navy); font-weight: 900; font-size: 12px; margin-right: 4px; }
+
+.search-wrap { position: relative; margin-bottom: 14px; }
+.search-wrap input { width: 100%; padding: 14px 46px 14px 16px; border: 2px solid var(--line); border-radius: 16px; background: var(--card); font-size: 14px; font-weight: 600; box-shadow: var(--shadow); transition: 0.3s; }
+.search-wrap input:focus { outline: none; border-color: var(--primary-light); }
+.search-wrap i { position: absolute; right: 17px; top: 50%; transform: translateY(-50%); color: var(--muted); }
+
+.chips-label { font-size: 12.5px; font-weight: 800; color: var(--navy); margin: 12px 2px 8px; display: flex; align-items: center; gap: 7px; }
+.chips-label i { color: var(--gold); }
+.chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex-shrink: 0; padding: 9px 16px; border-radius: 30px; background: var(--card); border: 1.5px solid var(--line); font-size: 12.5px; font-weight: 700; color: var(--text); cursor: pointer; display: flex; align-items: center; gap: 7px; transition: 0.25s; font-family: 'Cairo', sans-serif; }
+.chip i { font-size: 12px; color: var(--muted); transition: 0.25s; }
+.chip.active { background: linear-gradient(135deg, var(--navy), var(--primary)); border-color: var(--navy); color: white; box-shadow: 0 5px 14px rgba(30,58,138,0.3); }
+.chip.active i { color: var(--gold-light); }
+
+.results-bar { display: flex; justify-content: space-between; align-items: center; background: var(--card); border-radius: 14px; padding: 10px 16px; margin: 6px 0 14px; box-shadow: var(--shadow); font-size: 12.5px; font-weight: 700; color: var(--muted); }
+.results-bar b { color: var(--primary); font-size: 15px; }
+
+.driver-card { background: var(--card); border-radius: 20px; padding: 18px; box-shadow: var(--shadow); border: 1px solid var(--line); margin-bottom: 14px; cursor: pointer; transition: 0.3s; position: relative; overflow: hidden; animation: cardIn 0.45s ease backwards; }
+@keyframes cardIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+.driver-card:active { transform: scale(0.98); }
+.driver-card::before { content: ''; position: absolute; top: 0; right: 0; width: 5px; height: 100%; background: linear-gradient(180deg, var(--gold), var(--gold-light)); }
+.fav-btn { position: absolute; top: 14px; left: 14px; width: 38px; height: 38px; border-radius: 12px; border: none; background: var(--bg); color: #94A3B8; font-size: 16px; cursor: pointer; transition: 0.3s; z-index: 2; }
+.fav-btn.on { background: #FEE2E2; color: var(--red); }
+.dc-head { display: flex; align-items: center; gap: 13px; margin-bottom: 13px; padding-left: 44px; }
+.dc-avatar { width: 54px; height: 54px; border-radius: 17px; background: linear-gradient(135deg, var(--navy), var(--primary-light)); color: white; font-size: 23px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 6px 14px rgba(30,58,138,0.25); }
+.dc-info { flex: 1; }
+.dc-info h3 { font-size: 15.5px; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.dc-info .stars { margin-top: 3px; }
+.verified-badge { display: inline-flex; align-items: center; gap: 4px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: white; padding: 2px 9px; border-radius: 20px; font-size: 9.5px; font-weight: 800; }
+.dc-status { padding: 5px 12px; border-radius: 20px; font-size: 10.5px; font-weight: 800; display: flex; align-items: center; gap: 6px; }
+.dc-status.on { background: #D1FAE5; color: #065F46; }
+.dc-status.off { background: #F1F5F9; color: #94A3B8; }
+.dc-status .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.dc-body { display: flex; flex-direction: column; gap: 9px; }
+.dc-row { display: flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 700; color: var(--muted); }
+.dc-row i { width: 30px; height: 30px; border-radius: 9px; background: var(--bg); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.dc-row span { color: var(--text); }
+.dc-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.dc-tag { background: #EEF2FF; color: var(--primary); padding: 4px 11px; border-radius: 20px; font-size: 10.5px; font-weight: 800; }
+.svc-tag { background: #FEF3C7; color: #92400E; padding: 4px 11px; border-radius: 20px; font-size: 10.5px; font-weight: 800; }
+.out-tag { background: #F3E8FF; color: #6B21A8; padding: 4px 11px; border-radius: 20px; font-size: 10.5px; font-weight: 800; }
+.dc-footer { margin-top: 14px; padding-top: 13px; border-top: 1.5px dashed var(--line); display: flex; align-items: center; justify-content: space-between; }
+.dc-footer .hint { font-size: 11px; color: var(--muted); font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.dc-footer .hint i { color: var(--gold); }
+.dc-open { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; border: none; padding: 9px 18px; border-radius: 12px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 7px; font-family: 'Cairo', sans-serif; box-shadow: 0 5px 14px rgba(30,58,138,0.3); }
+
+.area-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.area-card { background: var(--card); border-radius: 18px; padding: 18px 14px; text-align: center; box-shadow: var(--shadow); border: 1px solid var(--line); cursor: pointer; transition: 0.3s; animation: cardIn 0.4s ease backwards; }
+.area-card:active { transform: scale(0.96); }
+.area-card i { width: 48px; height: 48px; border-radius: 15px; background: linear-gradient(135deg, #EEF2FF, #DBEAFE); color: var(--primary); font-size: 20px; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+.area-card h4 { font-size: 14px; font-weight: 800; color: var(--navy); }
+.area-card p { font-size: 11px; color: var(--muted); font-weight: 700; margin-top: 3px; }
+
+.form-card { background: var(--card); border-radius: 20px; padding: 20px; box-shadow: var(--shadow); border: 1px solid var(--line); }
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-size: 13px; font-weight: 800; margin-bottom: 7px; color: var(--navy); }
+.form-group input, .form-group select { width: 100%; padding: 12px 14px; border: 2px solid var(--line); border-radius: 12px; font-size: 14px; font-family: 'Cairo', sans-serif; background: white; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary-light); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.check-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.check-item { display: flex; align-items: center; gap: 6px; background: var(--bg); padding: 8px 14px; border-radius: 20px; font-size: 12.5px; font-weight: 700; cursor: pointer; border: 2px solid transparent; transition: 0.25s; }
+.check-item:has(input:checked) { background: #DBEAFE; border-color: var(--primary); color: var(--primary); }
+.check-item input { display: none; }
+.submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border: none; border-radius: 14px; color: #78350F; font-size: 15px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: 'Cairo', sans-serif; box-shadow: 0 8px 20px rgba(245,158,11,0.3); }
+.submit-btn:active { transform: scale(0.98); }
+.status-card { background: var(--card); border-radius: 20px; padding: 30px 20px; text-align: center; box-shadow: var(--shadow); border: 1px solid var(--line); }
+.status-icon { width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 30px; color: white; }
+.st-pending { background: linear-gradient(135deg, var(--gold), var(--gold-light)); }
+.st-approved { background: linear-gradient(135deg, var(--green), #059669); }
+.st-rejected { background: linear-gradient(135deg, var(--red), #DC2626); }
+.status-card h3 { font-size: 18px; font-weight: 900; color: var(--navy); margin-bottom: 8px; }
+.status-card p { font-size: 13px; color: var(--muted); font-weight: 600; line-height: 1.9; }
+.status-reason { margin-top: 12px; background: #FEE2E2; color: #991B1B; padding: 10px 14px; border-radius: 12px; font-size: 12.5px; font-weight: 700; }
+.status-actions { margin-top: 16px; }
+
+.notif-item { display: flex; gap: 12px; background: var(--card); border-radius: 16px; padding: 14px; margin-bottom: 10px; box-shadow: var(--shadow); border: 1px solid var(--line); animation: cardIn 0.4s ease backwards; }
+.notif-icon { width: 42px; height: 42px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 17px; color: white; flex-shrink: 0; }
+.ni-success { background: linear-gradient(135deg, var(--green), #059669); }
+.ni-star { background: linear-gradient(135deg, var(--gold), var(--gold-light)); }
+.ni-error { background: linear-gradient(135deg, var(--red), #DC2626); }
+.ni-megaphone { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
+.notif-body h4 { font-size: 13.5px; font-weight: 800; color: var(--navy); margin-bottom: 3px; }
+.notif-body p { font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.7; }
+.notif-body time { font-size: 10.5px; color: #94A3B8; font-weight: 700; }
+
+.about-hero { background: linear-gradient(135deg, var(--navy) 0%, var(--primary) 100%); border-radius: 22px; padding: 24px 20px; color: white; text-align: center; position: relative; overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-lg); }
+.about-logo-wrap { width: 86px; height: 86px; margin: 0 auto 14px; background: white; border-radius: 24px; padding: 6px; box-shadow: 0 12px 30px rgba(0,0,0,0.25); position: relative; z-index: 2; }
+.about-logo-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 18px; }
+.about-hero h2 { font-size: 24px; font-weight: 900; margin-bottom: 5px; position: relative; z-index: 2; }
+.about-hero .ver { display: inline-block; background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); color: var(--gold-light); padding: 4px 16px; border-radius: 20px; font-size: 11px; font-weight: 800; margin-top: 8px; position: relative; z-index: 2; }
+.about-section { background: var(--card); border-radius: 20px; padding: 20px; box-shadow: var(--shadow); border: 1px solid var(--line); margin-bottom: 14px; }
+.about-section-title { font-size: 15px; font-weight: 900; color: var(--navy); display: flex; align-items: center; gap: 9px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 2px dashed var(--line); }
+.about-section-title i { color: var(--gold); font-size: 16px; }
+.about-section p { font-size: 13.5px; line-height: 2; color: var(--text); font-weight: 600; }
+.about-section .highlight { color: var(--primary); font-weight: 800; }
+.dialect-quote { background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border-right: 4px solid var(--gold); padding: 14px 16px; border-radius: 12px; font-size: 13.5px; font-weight: 800; color: #92400E; margin-top: 12px; line-height: 1.9; }
+.dialect-quote i { margin-left: 6px; color: var(--gold); }
+.feature-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1.5px dashed var(--line); }
+.feature-item:last-child { border: none; padding-bottom: 0; }
+.fi-icon { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(135deg, #EEF2FF, #DBEAFE); color: var(--primary); font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.fi-text h4 { font-size: 13.5px; font-weight: 800; color: var(--navy); margin-bottom: 2px; }
+.fi-text p { font-size: 12px; color: var(--muted); font-weight: 600; line-height: 1.6; }
+.dev-card { background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%); border-radius: 24px; padding: 26px 20px; box-shadow: var(--shadow-lg); border: 2px solid var(--line); text-align: center; margin-bottom: 14px; position: relative; overflow: hidden; }
+.dev-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 80px; background: linear-gradient(135deg, var(--navy) 0%, var(--primary) 100%); }
+.dev-avatar { width: 96px; height: 96px; margin: 10px auto 14px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 50%; position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 900; color: white; border: 5px solid white; box-shadow: 0 12px 30px rgba(245,158,11,0.4); }
+.dev-badge { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, var(--navy), var(--primary)); color: white; padding: 5px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; margin-bottom: 10px; }
+.dev-badge i { color: var(--gold-light); font-size: 10px; }
+.dev-name { font-size: 22px; font-weight: 900; color: var(--navy); margin-bottom: 4px; }
+.dev-title { font-size: 12.5px; color: var(--muted); font-weight: 700; margin-bottom: 6px; }
+.dev-city { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--primary); font-weight: 700; background: #EEF2FF; padding: 4px 12px; border-radius: 20px; }
+.social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+.social-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px 8px; border-radius: 16px; text-decoration: none; transition: 0.3s; border: 1.5px solid var(--line); background: white; position: relative; overflow: hidden; }
+.social-btn:active { transform: scale(0.95); }
+.social-btn i { font-size: 26px; transition: 0.3s; }
+.social-btn span { font-size: 11px; font-weight: 800; color: var(--text); }
+.social-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--c1), var(--c2)); opacity: 0; transition: 0.3s; z-index: 0; }
+.social-btn:hover::before, .social-btn:active::before { opacity: 1; }
+.social-btn:hover i, .social-btn:hover span, .social-btn:active i, .social-btn:active span { color: white; position: relative; z-index: 1; }
+.social-btn:hover { border-color: transparent; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+.sb-ig { --c1: #E1306C; --c2: #F77737; } .sb-ig i { color: #E1306C; }
+.sb-wa { --c1: #25D366; --c2: #128C7E; } .sb-wa i { color: #25D366; }
+.sb-sc { --c1: #FACC15; --c2: #EAB308; } .sb-sc i { color: #000; }
+.app-footer { text-align: center; padding: 20px 10px 10px; font-size: 11.5px; color: var(--muted); font-weight: 700; }
+.app-footer i { color: #EF4444; margin: 0 3px; animation: heart 1.2s ease-in-out infinite; }
+@keyframes heart { 0%,100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+.sheet { position: fixed; inset: 0; z-index: 500; background: rgba(23,37,84,0.55); backdrop-filter: blur(3px); display: none; align-items: flex-end; justify-content: center; }
+.sheet.open { display: flex; }
+.sheet-content { width: 100%; max-width: 520px; background: var(--bg); border-radius: 28px 28px 0 0; padding: 14px 20px 30px; max-height: 88vh; overflow-y: auto; animation: sheetUp 0.4s cubic-bezier(0.16,1,0.3,1); }
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.sheet-handle { width: 48px; height: 5px; border-radius: 10px; background: #CBD5E1; margin: 0 auto 18px; }
+.sheet-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.sheet-avatar { width: 66px; height: 66px; border-radius: 20px; background: linear-gradient(135deg, var(--navy), var(--primary-light)); color: white; font-size: 28px; font-weight: 900; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(30,58,138,0.3); }
+.sheet-head h3 { font-size: 18px; font-weight: 900; color: var(--navy); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sheet-card { background: var(--card); border-radius: 18px; padding: 16px; box-shadow: var(--shadow); margin-bottom: 12px; }
+.sheet-row { display: flex; align-items: center; gap: 12px; padding: 9px 0; font-size: 13.5px; font-weight: 700; }
+.sheet-row i { width: 36px; height: 36px; border-radius: 11px; background: var(--bg); color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.sheet-row .lbl { color: var(--muted); font-size: 11px; display: block; }
+.rate-box { background: var(--card); border-radius: 18px; padding: 16px; box-shadow: var(--shadow); margin-bottom: 12px; text-align: center; }
+.rate-title { font-size: 13.5px; font-weight: 800; color: var(--navy); margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 7px; }
+.rate-title i { color: var(--gold); }
+.rate-stars { display: flex; justify-content: center; gap: 8px; direction: ltr; }
+.rate-stars button { background: none; border: none; font-size: 26px; color: #D1D5DB; cursor: pointer; transition: 0.2s; padding: 4px; }
+.rate-stars button.lit { color: var(--gold); }
+.rate-stars button:active { transform: scale(1.2); }
+.rate-note { font-size: 11.5px; color: var(--muted); font-weight: 700; margin-top: 8px; }
+.sheet-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+.big-btn { padding: 14px; border: none; border-radius: 16px; color: white; font-size: 14px; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 9px; font-family: 'Cairo', sans-serif; text-decoration: none; transition: 0.3s; }
+.big-btn:active { transform: scale(0.97); }
+.btn-call { background: linear-gradient(135deg, var(--green), #059669); box-shadow: 0 8px 20px rgba(16,185,129,0.35); }
+.btn-wa { background: linear-gradient(135deg, #25D366, #1DA851); box-shadow: 0 8px 20px rgba(37,211,102,0.35); }
+.btn-share { background: linear-gradient(135deg, var(--primary), var(--primary-light)); box-shadow: 0 8px 20px rgba(30,58,138,0.35); }
+.btn-fav { background: linear-gradient(135deg, #94A3B8, #64748B); box-shadow: 0 8px 20px rgba(100,116,139,0.35); }
+.btn-fav.on { background: linear-gradient(135deg, var(--red), #DC2626); box-shadow: 0 8px 20px rgba(239,68,68,0.35); }
+
+.guide-modal { position: fixed; inset: 0; z-index: 600; background: rgba(23,37,84,0.6); backdrop-filter: blur(3px); display: none; align-items: center; justify-content: center; padding: 20px; }
+.guide-modal.open { display: flex; }
+.guide-box { background: white; border-radius: 24px; padding: 26px 22px; width: 100%; max-width: 400px; text-align: center; animation: pop 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+.guide-box h3 { font-size: 18px; font-weight: 900; color: var(--navy); margin-bottom: 18px; display: flex; align-items: center; justify-content: center; gap: 9px; }
+.guide-box h3 i { color: var(--gold); }
+.guide-step { display: flex; align-items: center; gap: 13px; text-align: right; padding: 12px; border-radius: 14px; background: var(--bg); margin-bottom: 10px; }
+.guide-step .num { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg, var(--navy), var(--primary)); color: white; font-weight: 900; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+.guide-step p { font-size: 13px; font-weight: 700; color: var(--text); flex: 1; }
+.guide-step i { font-size: 20px; color: var(--primary); }
+.guide-close { width: 100%; margin-top: 8px; padding: 13px; background: linear-gradient(135deg, var(--navy), var(--primary)); color: white; border: none; border-radius: 13px; font-size: 14px; font-weight: 800; cursor: pointer; font-family: 'Cairo', sans-serif; }
+
+.bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 520px; z-index: 200; background: var(--card); border-radius: 24px 24px 0 0; box-shadow: 0 -8px 30px rgba(23,37,84,0.12); display: flex; padding: 10px 8px calc(10px + env(safe-area-inset-bottom)); }
+.bn-item { flex: 1; background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 7px 0; color: #94A3B8; font-size: 9.5px; font-weight: 800; font-family: 'Cairo', sans-serif; position: relative; transition: 0.3s; }
+.bn-item i { font-size: 18px; transition: 0.3s; }
+.bn-item.active { color: var(--primary); }
+.bn-item.active i { transform: translateY(-2px) scale(1.1); }
+.bn-item.active::before { content: ''; position: absolute; top: -10px; width: 26px; height: 4px; border-radius: 10px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+.fav-count { position: absolute; top: 2px; left: 50%; margin-left: 4px; min-width: 16px; height: 16px; background: var(--red); color: white; border-radius: 10px; font-size: 9px; font-weight: 900; display: flex; align-items: center; justify-content: center; padding: 0 4px; }
+
+.empty { text-align: center; padding: 50px 20px; color: var(--muted); }
+.empty i { font-size: 52px; color: #CBD5E1; margin-bottom: 14px; }
+.empty h4 { font-size: 16px; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
+.empty p { font-size: 12.5px; font-weight: 600; }
+
+#toast { position: fixed; top: 22px; left: 50%; transform: translateX(-50%) translateY(-130px); background: var(--navy); color: white; padding: 12px 24px; border-radius: 30px; font-size: 13px; font-weight: 800; z-index: 9998; transition: 0.4s; display: flex; align-items: center; gap: 9px; box-shadow: var(--shadow-lg); max-width: 90%; }
+#toast.show { transform: translateX(-50%) translateY(0); }
+#toast i { color: var(--gold-light); }
+</style>
+</head>
+<body>
+
+<div id="splash">
+    <div class="splash-logo"><img src="https://j.top4top.io/p_3868kjtjj1.jpg" alt="شرقاطنا"></div>
+    <h1>شرقاطنا</h1>
+    <p>سواق من منطقتنا .. يوصلك بأمان</p>
+    <div class="splash-bar"></div>
+</div>
+
+<div class="app">
+
+    <header class="header">
+        <div class="header-row">
+            <div class="brand">
+                <div class="brand-icon"><img src="https://j.top4top.io/p_3868kjtjj1.jpg" alt="شعار"></div>
+                <div>
+                    <h1>شرقاطنا</h1>
+                    <p>دليل سواق الشرقاط</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="bell-btn" onclick="openNotifs()"><i class="fas fa-bell"></i><span class="bell-badge" id="bellBadge" style="display:none">0</span></button>
+                <div class="live-badge"><span class="live-dot"></span> مباشر</div>
+            </div>
+        </div>
+    </header>
+
+    <section class="page active" id="page-home">
+        <div class="info-card" id="installCard">
+            <div class="info-icon"><img src="https://j.top4top.io/p_3868kjtjj1.jpg" alt="تثبيت"></div>
+            <div class="info-text">
+                <h3>ثبت تطبيق شرقاطنا</h3>
+                <p>خليه بشاشة هاتفك وافتحه مثل أي تطبيق</p>
+            </div>
+            <button class="info-btn" onclick="installApp()"><i class="fas fa-download"></i> تثبيت</button>
+        </div>
+
+        <div class="info-card" id="notifCard" style="display:none">
+            <div class="info-icon"><i class="fas fa-bell"></i></div>
+            <div class="info-text">
+                <h3>فعّل الإشعارات</h3>
+                <p>ليوصلك خبر الموافقة والتقييمات حتى والتطبيق مغلق</p>
+            </div>
+            <button class="info-btn" onclick="enableNotifs()"><i class="fas fa-bell"></i> تفعيل</button>
+        </div>
+
+        <div class="join-cta" onclick="showPage('join')">
+            <div class="join-cta-icon"><i class="fas fa-user-plus"></i></div>
+            <div class="join-cta-text">
+                <h3>انت سواق بالشرقاط؟</h3>
+                <p>سجل نفسك وخلّي أهل منطقتك يوصلون الك</p>
+            </div>
+            <i class="fas fa-chevron-left join-arrow"></i>
+        </div>
+
+        <div class="hero">
+            <h2>هلا بيك بشرقاطنا</h2>
+            <p>لقى سواق موثوق بمنطقتك، وتواصل وياه مباشرة بضغطة وحدة</p>
+        </div>
+
+        <div class="stats-row">
+            <div class="mini-stat"><i class="fas fa-users"></i><h3 id="hDrivers">0</h3><p>سواق</p></div>
+            <div class="mini-stat"><i class="fas fa-map-location-dot"></i><h3 id="hAreas">0</h3><p>منطقة</p></div>
+            <div class="mini-stat"><i class="fas fa-car"></i><h3 id="hCars">0</h3><p>نوع سيارة</p></div>
+        </div>
+
+        <div class="section-head">
+            <div class="section-title"><i class="fas fa-trophy"></i> الأعلى تقييماً</div>
+            <button class="see-all" onclick="showPage('drivers')">عرض الكل <i class="fas fa-chevron-left"></i></button>
+        </div>
+        <div class="h-scroll" id="topRatedScroll"></div>
+
+        <div class="section-head">
+            <div class="section-title"><i class="fas fa-bolt"></i> متاحين هسة</div>
+            <button class="see-all" onclick="showPage('drivers')">عرض الكل <i class="fas fa-chevron-left"></i></button>
+        </div>
+        <div id="availablePreview"></div>
+    </section>
+
+    <section class="page" id="page-drivers">
+        <div class="search-wrap">
+            <i class="fas fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="دوّر على سواق أو سيارة أو منطقة...">
+        </div>
+        <div class="chips-label"><i class="fas fa-map-location-dot"></i> المنطقة</div>
+        <div class="chips" id="areaChips"></div>
+        <div class="chips-label"><i class="fas fa-car"></i> نوع السيارة</div>
+        <div class="chips" id="carChips"></div>
+        <div class="chips-label"><i class="fas fa-road"></i> مشاوير خارج المدينة</div>
+        <div class="chips" id="outChips"></div>
+        <div class="results-bar">
+            <span>السواق المتوفرين</span>
+            <b id="resultsCount">0</b>
+        </div>
+        <div id="driversList"></div>
+    </section>
+
+    <section class="page" id="page-favs">
+        <div class="section-head" style="margin-top:4px">
+            <div class="section-title"><i class="fas fa-heart"></i> مفضلتني</div>
+        </div>
+        <p style="font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:16px">السواقين اللي حفظتهم، يوصلك لهم بسرعة</p>
+        <div id="favsList"></div>
+    </section>
+
+    <section class="page" id="page-join">
+        <div class="section-head" style="margin-top:4px">
+            <div class="section-title"><i class="fas fa-user-plus"></i> سجل كسواق</div>
+        </div>
+        <div id="joinStatusView" style="display:none"></div>
+        <div id="joinFormView">
+            <p style="font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:16px">عبّي معلوماتك بدقة، وبعد المراجعة من الإدارة ينزل اسمك بالتطبيق</p>
+            <div class="form-card">
+                <form onsubmit="submitJoin(event)">
+                    <div class="form-group"><label>الاسم الكامل</label><input type="text" id="jName" required placeholder="اسمك الثلاثي"></div>
+                    <div class="form-row">
+                        <div class="form-group"><label>رقم الهاتف</label><input type="tel" id="jPhone" required placeholder="07XXXXXXXX" maxlength="11"></div>
+                        <div class="form-group"><label>نوع السيارة</label><select id="jCarType" required></select></div>
+                    </div>
+                    <div class="form-group"><label>موديل السيارة</label><input type="text" id="jCarModel" required placeholder="مثال: تويوتا كورولا 2020"></div>
+                    <div class="form-group"><label>مناطق النقل داخل الشرقاط</label><div class="check-group" id="jAreas"></div></div>
+                    <div class="form-group"><label>مشاوير خارج المدينة (اختياري)</label><div class="check-group" id="jOut"></div></div>
+                    <div class="form-group"><label>خدمات إضافية (اختياري)</label><div class="check-group" id="jSvc"></div></div>
+                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> إرسال الطلب للمراجعة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="page" id="page-areas">
+        <div class="section-head" style="margin-top:4px">
+            <div class="section-title"><i class="fas fa-map-location-dot"></i> مناطق الشرقاط</div>
+        </div>
+        <p style="font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:16px">اختار منطقتك ونعرضلك السواق اللي يمشي بيها</p>
+        <div class="area-grid" id="areasGrid"></div>
+    </section>
+
+    <section class="page" id="page-about">
+        <div class="about-hero">
+            <div class="about-logo-wrap"><img src="https://j.top4top.io/p_3868kjtjj1.jpg" alt="شرقاطنا"></div>
+            <h2>شرقاطنا</h2>
+            <p style="font-size:12.5px;opacity:0.85;font-weight:600;margin-top:4px;">سواق من منطقتنا .. يوصلك بأمان</p>
+            <span class="ver"><i class="fas fa-code-branch"></i> الإصدار 5.0.0</span>
+        </div>
+
+        <div class="about-section">
+            <div class="about-section-title"><i class="fas fa-lightbulb"></i> شلون طلعت فكرة التطبيق</div>
+            <p>كلنا نعرف بالشرقاط شكد يصعب الموضوع لما تريد تروح مكان وما تلقى سواق، أو تحتاج تنقل غراضك وما تعرف منو الموثوق. <span class="highlight">من هنا طلعت الفكرة</span>: تطبيق يجمع كل سواق الشرقاط بمكان واحد، كل واحد مكتوب نوع سيارته والمناطق اللي يمشي بيها، وتقدر تتواصل وياه مباشرة بدون وسيط.</p>
+            <div class="dialect-quote"><i class="fas fa-quote-right"></i> هسة صار كلشي بمتناول ايدك، بضغطة وحدة تلقى سواقك!</div>
+        </div>
+
+        <div class="about-section">
+            <div class="about-section-title"><i class="fas fa-star"></i> شنو يميزنا</div>
+            <div class="feature-item"><div class="fi-icon"><i class="fas fa-bell"></i></div><div class="fi-text"><h4>إشعارات push حقيقية</h4><p>توصلك حتى والتطبيق مغلق: الموافقة، الرفض، التقييمات، وأخبار التطبيق</p></div></div>
+            <div class="feature-item"><div class="fi-icon"><i class="fas fa-user-plus"></i></div><div class="fi-text"><h4>السواق يسجل نفسه</h4><p>كل سواق يضيف معلوماته بنفسه، والموافقة من الإدارة بعد التدقيق</p></div></div>
+            <div class="feature-item"><div class="fi-icon"><i class="fas fa-certificate"></i></div><div class="fi-text"><h4>سواق موثّق</h4><p>شارة ذهبية للسواق اللي تم التحقق من هويته ورخصته</p></div></div>
+            <div class="feature-item"><div class="fi-icon"><i class="fas fa-star-half-stroke"></i></div><div class="fi-text"><h4>تقييم من الناس</h4><p>قيّم سواقك بنجومك، والتقييم ينعكس على الجميع فوراً</p></div></div>
+            <div class="feature-item"><div class="fi-icon"><i class="fas fa-heart"></i></div><div class="fi-text"><h4>مفضلة خاصة بيك</h4><p>احفظ سواقينك المعتادين وارجع لهم بضغطة</p></div></div>
+            <div class="feature-item"><div class="fi-icon"><i class="fas fa-road"></i></div><div class="fi-text"><h4>مشاوير خارج المدينة</h4><p>بغداد، موصل، تكريت، سامراء.. اعرف من يروح وين</p></div></div>
+        </div>
+
+        <div class="dev-card">
+            <div class="dev-avatar">ح</div>
+            <div class="dev-badge"><i class="fas fa-circle-check"></i> مطور التطبيق</div>
+            <h3 class="dev-name">حمد النزار</h3>
+            <p class="dev-title">مطور تطبيقات ويب</p>
+            <div class="dev-city"><i class="fas fa-map-marker-alt"></i> الشرقاط، العراق</div>
+            <div class="social-grid">
+                <a href="https://www.instagram.com/3c5_o?igsh=YTBwY3NxdndoMzE5" target="_blank" class="social-btn sb-ig"><i class="fab fa-instagram"></i><span>انستغرام</span></a>
+                <a href="https://wa.me/9647861008872" target="_blank" class="social-btn sb-wa"><i class="fab fa-whatsapp"></i><span>واتساب</span></a>
+                <a href="https://www.snapchat.com/add/vv_90k?share_id=KmcS3bgI78I&locale=ar-IQ-u-nu-arab" target="_blank" class="social-btn sb-sc"><i class="fab fa-snapchat"></i><span>سناب شات</span></a>
+            </div>
+        </div>
+
+        <div class="app-footer">صُنع بكل <i class="fas fa-heart"></i> في الشرقاط<br>© 2026 جميع الحقوق محفوظة</div>
+    </section>
+
+    <nav class="bottom-nav">
+        <button class="bn-item active" data-page="home" onclick="showPage('home')"><i class="fas fa-house"></i>الرئيسية</button>
+        <button class="bn-item" data-page="drivers" onclick="showPage('drivers')"><i class="fas fa-users"></i>السواق</button>
+        <button class="bn-item" data-page="favs" onclick="showPage('favs')"><i class="fas fa-heart"></i>مفضلتي<span class="fav-count" id="favCount" style="display:none">0</span></button>
+        <button class="bn-item" data-page="areas" onclick="showPage('areas')"><i class="fas fa-map-location-dot"></i>المناطق</button>
+        <button class="bn-item" data-page="about" onclick="showPage('about')"><i class="fas fa-circle-info"></i>حول</button>
+    </nav>
+</div>
+
+<div class="sheet" id="driverSheet">
+    <div class="sheet-content">
+        <div class="sheet-handle"></div>
+        <div class="sheet-head">
+            <div class="sheet-avatar" id="shAvatar"></div>
+            <div>
+                <h3 id="shName"></h3>
+                <div class="stars" id="shStars"></div>
+            </div>
+        </div>
+        <div class="sheet-card">
+            <div class="sheet-row"><i class="fas fa-car"></i><div><span class="lbl">السيارة</span><span id="shCar"></span></div></div>
+            <div class="sheet-row"><i class="fas fa-phone"></i><div><span class="lbl">رقم الهاتف</span><span id="shPhone" style="direction:ltr;display:inline-block"></span></div></div>
+            <div class="sheet-row"><i class="fas fa-map-location-dot"></i><div><span class="lbl">مناطق النقل</span><div class="dc-tags" id="shAreas" style="margin-top:5px"></div></div></div>
+            <div class="sheet-row" id="shOutRow" style="display:none"><i class="fas fa-road"></i><div><span class="lbl">مشاوير خارج المدينة</span><div class="dc-tags" id="shOut" style="margin-top:5px"></div></div></div>
+            <div class="sheet-row" id="shSvcRow" style="display:none"><i class="fas fa-concierge-bell"></i><div><span class="lbl">خدمات إضافية</span><div class="dc-tags" id="shSvc" style="margin-top:5px"></div></div></div>
+        </div>
+        <div class="rate-box">
+            <div class="rate-title"><i class="fas fa-star"></i> قيّم هذا السواق</div>
+            <div class="rate-stars" id="rateStars"></div>
+            <p class="rate-note" id="rateNote"></p>
+        </div>
+        <div class="sheet-actions">
+            <a href="#" class="big-btn btn-call" id="shCall"><i class="fas fa-phone"></i> اتصال</a>
+            <a href="#" target="_blank" class="big-btn btn-wa" id="shWa"><i class="fab fa-whatsapp"></i> واتساب</a>
+            <button class="big-btn btn-share" id="shShare"><i class="fas fa-share-nodes"></i> مشاركة</button>
+            <button class="big-btn btn-fav" id="shFav"><i class="fas fa-heart"></i> مفضلة</button>
+        </div>
+    </div>
+</div>
+
+<div class="sheet" id="notifSheet">
+    <div class="sheet-content">
+        <div class="sheet-handle"></div>
+        <div class="sheet-head">
+            <div class="sheet-avatar" style="background:linear-gradient(135deg,var(--gold),var(--gold-light))"><i class="fas fa-bell" style="font-size:26px"></i></div>
+            <div><h3>الإشعارات</h3><div class="stars" style="color:var(--muted);font-size:11px">كل جديد يوصلك هنا</div></div>
+        </div>
+        <div id="notifList"></div>
+    </div>
+</div>
+
+<div class="guide-modal" id="iosGuide">
+    <div class="guide-box">
+        <h3><i class="fab fa-apple"></i> التثبيت على آيفون</h3>
+        <div class="guide-step"><span class="num">1</span><p>افتح التطبيق بمتصفح سفاري Safari</p><i class="fab fa-safari"></i></div>
+        <div class="guide-step"><span class="num">2</span><p>اضغط على زر المشاركة تحت الشاشة</p><i class="fas fa-share-from-square"></i></div>
+        <div class="guide-step"><span class="num">3</span><p>اختر "إضافة إلى الشاشة الرئيسية"</p><i class="fas fa-square-plus"></i></div>
+        <div class="guide-step"><span class="num">4</span><p>اضغط "إضافة" وراح تظهر الأيقونة بهاتفك</p><i class="fas fa-circle-check"></i></div>
+        <button class="guide-close" onclick="closeGuide('iosGuide')">فهمت</button>
+    </div>
+</div>
+
+<div class="guide-modal" id="androidGuide">
+    <div class="guide-box">
+        <h3><i class="fab fa-android"></i> التثبيت على أندرويد</h3>
+        <div class="guide-step"><span class="num">1</span><p>افتح التطبيق بمتصفح كروم Chrome</p><i class="fab fa-chrome"></i></div>
+        <div class="guide-step"><span class="num">2</span><p>اضغط على علامة الثلاث نقاط فوق</p><i class="fas fa-ellipsis-vertical"></i></div>
+        <div class="guide-step"><span class="num">3</span><p>اختر "تثبيت التطبيق" أو "إضافة إلى الشاشة الرئيسية"</p><i class="fas fa-download"></i></div>
+        <div class="guide-step"><span class="num">4</span><p>أكد التثبيت وراح تظهر الأيقونة بهاتفك</p><i class="fas fa-circle-check"></i></div>
+        <button class="guide-close" onclick="closeGuide('androidGuide')">فهمت</button>
+    </div>
+</div>
+
+<div id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, onSnapshot, doc, updateDoc, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBcy1utI3B8T9LWMSLX8X7K37N1YvviKVE",
+    authDomain: "sharqatna.firebaseapp.com",
+    projectId: "sharqatna",
+    storageBucket: "sharqatna.firebasestorage.app",
+    messagingSenderId: "601274372954",
+    appId: "1:601274372954:web:d4ef37d602dd050b7b5963",
+    measurementId: "G-CDDH1GLN71"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const OUT_TRIPS = ['بغداد', 'موصل', 'تكريت', 'سامراء', 'كركوك'];
+const SERVICES = ['توصيل طلاب', 'توصيل طلبات', 'نقل أثاث', 'تأجير خاص', 'مناوبات'];
+
+let driversData = [], areasData = [], carsData = [], notifsData = [];
+let currentArea = 'all', currentCar = 'all', currentOut = 'all', searchQuery = '';
+let readyCount = 0, currentSheetId = null;
+let myRequestData = null, myReqUnsub = null;
+let OSRef = null;
+const startTime = Date.now();
+
+const getFavs = () => JSON.parse(localStorage.getItem('shFavs') || '[]');
+const getRated = () => JSON.parse(localStorage.getItem('shRated') || '{}');
+const getDeviceId = () => {
+    let id = localStorage.getItem('shDeviceId');
+    if (!id) {
+        id = (crypto.randomUUID ? crypto.randomUUID() : 'd' + Date.now() + Math.random().toString(16).slice(2));
+        localStorage.setItem('shDeviceId', id);
+    }
+    return id;
+};
+
+/* ===== ربط OneSignal بهوية الجهاز ===== */
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+window.OneSignalDeferred.push(async function(OneSignal) {
+    OSRef = OneSignal;
+    try { await OneSignal.login(getDeviceId()); } catch (e) {}
+    try { OneSignal.User.pushSubscription.addEventListener('change', updateNotifCard); } catch (e) {}
+    updateNotifCard();
+});
+
+function updateNotifCard() {
+    let opted = false;
+    try { opted = OSRef && OSRef.User.pushSubscription.optedIn; } catch (e) {}
+    document.getElementById('notifCard').style.display = opted ? 'none' : 'flex';
+}
+
+window.enableNotifs = async function() {
+    if (!OSRef) { toast('خدمة الإشعارات ما جاهزة بعد، انتظر شوية'); return; }
+    try {
+        if (OSRef.registerForPushNotifications) await OSRef.registerForPushNotifications();
+        else await OSRef.Notifications.requestPermission();
+        setTimeout(() => {
+            let ok = false;
+            try { ok = OSRef.User.pushSubscription.optedIn; } catch (e) {}
+            toast(ok ? 'تم تفعيل الإشعارات بنجاح' : 'ما اكتمل التفعيل، تأكد من إذن المتصفح');
+            updateNotifCard();
+        }, 1500);
+    } catch (e) { toast('تعذر تفعيل الإشعارات'); }
+};
+
+/* ===== التثبيت ===== */
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; });
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone;
+if (isStandalone) document.getElementById('installCard').style.display = 'none';
+
+window.installApp = async function() {
+    if (isStandalone) { toast('التطبيق مثبت بهاتفك'); return; }
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const choice = await deferredPrompt.userChoice;
+        toast(choice.outcome === 'accepted' ? 'تم تثبيت التطبيق بنجاح' : 'تم إلغاء التثبيت');
+        deferredPrompt = null;
+    } else if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
+        document.getElementById('iosGuide').classList.add('open');
+    } else {
+        document.getElementById('androidGuide').classList.add('open');
+    }
+};
+window.closeGuide = id => document.getElementById(id).classList.remove('open');
+document.querySelectorAll('.guide-modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); }));
+
+/* ===== الإشعارات الداخلية ===== */
+function myNotifs() {
+    return notifsData.filter(n => n.target === 'all' || n.target === getDeviceId());
+}
+function updateBell() {
+    const read = JSON.parse(localStorage.getItem('shNotifRead') || '[]');
+    const unread = myNotifs().filter(n => !read.includes(n.id)).length;
+    const el = document.getElementById('bellBadge');
+    el.style.display = unread ? 'flex' : 'none';
+    el.textContent = unread;
+}
+function notifIcon(t) {
+    return t === 'success' ? 'fa-circle-check' : t === 'star' ? 'fa-star' : t === 'error' ? 'fa-circle-xmark' : 'fa-bullhorn';
+}
+function renderNotifList() {
+    const list = myNotifs();
+    document.getElementById('notifList').innerHTML = list.length ? list.map((n, i) => `
+        <div class="notif-item" style="animation-delay:${i * 0.05}s">
+            <div class="notif-icon ni-${n.type || 'megaphone'}"><i class="fas ${notifIcon(n.type)}"></i></div>
+            <div class="notif-body">
+                <h4>${n.title}</h4>
+                <p>${n.body || ''}</p>
+                <time>${n.createdAt ? new Date(n.createdAt).toLocaleString('ar-IQ', { dateStyle: 'short', timeStyle: 'short' }) : ''}</time>
+            </div>
+        </div>`).join('')
+        : `<div class="empty"><i class="fas fa-bell-slash"></i><h4>ماكو إشعارات بعد</h4><p>أي جديد راح يوصلك هنا أول بأول</p></div>`;
+}
+window.openNotifs = function() {
+    document.getElementById('notifSheet').classList.add('open');
+    renderNotifList();
+    const read = new Set(JSON.parse(localStorage.getItem('shNotifRead') || '[]'));
+    myNotifs().forEach(n => read.add(n.id));
+    localStorage.setItem('shNotifRead', JSON.stringify([...read]));
+    setTimeout(updateBell, 400);
+};
+document.getElementById('notifSheet').addEventListener('click', e => { if (e.target.id === 'notifSheet') e.target.classList.remove('open'); });
+
+onSnapshot(collection(db, 'notifications'), snap => {
+    const prevIds = new Set(notifsData.map(p => p.id));
+    notifsData = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    if (prevIds.size) {
+        const fresh = notifsData.filter(n => !prevIds.has(n.id) && (n.target === 'all' || n.target === getDeviceId()));
+        if (fresh.length) toast(fresh[0].title);
+    }
+    updateBell();
+    if (document.getElementById('notifSheet').classList.contains('open')) renderNotifList();
+});
+
+/* ===== المزامنة ===== */
+function checkReady() {
+    readyCount++;
+    if (readyCount === 3) {
+        const wait = Math.max(0, 2300 - (Date.now() - startTime));
+        setTimeout(() => document.getElementById('splash').classList.add('hide'), wait);
+        renderAll();
+    }
+}
+onSnapshot(collection(db, 'drivers'), snap => { driversData = snap.docs.map(d => ({ id: d.id, ...d.data() })); checkReady(); renderAll(); }, err => { console.error(err); toast('تعذر الاتصال بقاعدة البيانات'); });
+onSnapshot(collection(db, 'areas'), snap => { areasData = snap.docs.map(d => ({ id: d.id, ...d.data() })); checkReady(); renderAll(); });
+onSnapshot(collection(db, 'carTypes'), snap => { carsData = snap.docs.map(d => ({ id: d.id, ...d.data() })); checkReady(); renderAll(); });
+
+/* ===== التنقل ===== */
+window.showPage = function(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.querySelectorAll('.bn-item').forEach(b => b.classList.toggle('active', b.dataset.page === page));
+    if (page === 'favs') renderFavs();
+    if (page === 'join') renderJoin();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+/* ===== التسجيل كسواق ===== */
+function renderJoin() {
+    if (myReqUnsub) { myReqUnsub(); myReqUnsub = null; }
+    const rid = localStorage.getItem('shMyRequest');
+    if (rid) {
+        myReqUnsub = onSnapshot(doc(db, 'requests', rid), snap => {
+            if (!snap.exists()) { localStorage.removeItem('shMyRequest'); myRequestData = null; showJoinForm(); return; }
+            myRequestData = { id: snap.id, ...snap.data() };
+            showJoinStatus(myRequestData);
+        });
+    } else showJoinForm();
+}
+function showJoinForm() {
+    const p = myRequestData || {};
+    document.getElementById('joinStatusView').style.display = 'none';
+    document.getElementById('joinFormView').style.display = 'block';
+    document.getElementById('jName').value = p.name || '';
+    document.getElementById('jPhone').value = p.phone || '';
+    document.getElementById('jCarModel').value = p.carModel || '';
+    document.getElementById('jCarType').innerHTML = carsData.map(c => `<option value="${c.name}" ${c.name === p.carType ? 'selected' : ''}>${c.name}</option>`).join('') || '<option value="">لا توجد أنواع</option>';
+    document.getElementById('jAreas').innerHTML = areasData.map(a => `<label class="check-item"><input type="checkbox" name="jAreas" value="${a.name}" ${(p.areas || []).includes(a.name) ? 'checked' : ''}> ${a.name}</label>`).join('');
+    document.getElementById('jOut').innerHTML = OUT_TRIPS.map(o => `<label class="check-item"><input type="checkbox" name="jOut" value="${o}" ${(p.outTrips || []).includes(o) ? 'checked' : ''}> ${o}</label>`).join('');
+    document.getElementById('jSvc').innerHTML = SERVICES.map(s => `<label class="check-item"><input type="checkbox" name="jSvc" value="${s}" ${(p.services || []).includes(s) ? 'checked' : ''}> ${s}</label>`).join('');
+}
+function showJoinStatus(r) {
+    document.getElementById('joinFormView').style.display = 'none';
+    const v = document.getElementById('joinStatusView');
+    v.style.display = 'block';
+    if (r.status === 'approved') {
+        v.innerHTML = `<div class="status-card"><div class="status-icon st-approved"><i class="fas fa-check"></i></div><h3>مبروك! طلبك مقبول</h3><p>اسمك ظاهر هسة بتطبيق شرقاطنا ضمن السواق، والناس تكدر توصل الك مباشرة.</p></div>`;
+    } else if (r.status === 'rejected') {
+        v.innerHTML = `<div class="status-card"><div class="status-icon st-rejected"><i class="fas fa-xmark"></i></div><h3>طلبك مرفوض</h3><p>للأسف ما قبلنا الطلب، تقدر تعدل بياناتك وتعيد الإرسال للمراجعة.</p><div class="status-reason">سبب الرفض: ${r.reason || 'غير محدد'}</div><div class="status-actions"><button class="submit-btn" onclick="editRequest()"><i class="fas fa-pen"></i> تعديل وإعادة إرسال</button></div></div>`;
+    } else {
+        v.innerHTML = `<div class="status-card"><div class="status-icon st-pending"><i class="fas fa-hourglass-half"></i></div><h3>طلبك قيد المراجعة</h3><p>استلمنا معلوماتك، وبعد التدقيق من الإدارة راح يظهر اسمك بالتطبيق فور الموافقة.</p></div>`;
+    }
+}
+window.editRequest = () => showJoinForm();
+
+window.submitJoin = async function(e) {
+    e.preventDefault();
+    const name = document.getElementById('jName').value.trim();
+    const phone = document.getElementById('jPhone').value.trim();
+    const carModel = document.getElementById('jCarModel').value.trim();
+    const carType = document.getElementById('jCarType').value;
+    if (!/^07\d{9}$/.test(phone)) { toast('اكتب رقم صحيح يبدي بـ 07'); return; }
+    const areas = Array.from(document.querySelectorAll('input[name="jAreas"]:checked')).map(c => c.value);
+    if (!areas.length) { toast('اختار منطقة واحدة على الأقل'); return; }
+    const data = {
+        name, phone, carModel, carType, areas,
+        outTrips: Array.from(document.querySelectorAll('input[name="jOut"]:checked')).map(c => c.value),
+        services: Array.from(document.querySelectorAll('input[name="jSvc"]:checked')).map(c => c.value),
+        deviceId: getDeviceId(),
+        status: 'pending', reason: '', createdAt: Date.now()
+    };
+    try {
+        const rid = localStorage.getItem('shMyRequest');
+        const allReq = (await getDocs(collection(db, 'requests'))).docs.map(d => ({ id: d.id, ...d.data() }));
+        const dup = driversData.some(d => d.phone === phone) || allReq.some(r => r.phone === phone && r.id !== rid && r.status !== 'rejected');
+        if (dup) { toast('هذا الرقم مسجل أو عنده طلب سابق'); return; }
+        if (rid && myRequestData && myRequestData.status === 'rejected') {
+            await updateDoc(doc(db, 'requests', rid), data);
+            toast('تم إعادة إرسال طلبك للمراجعة');
+        } else {
+            const ref = await addDoc(collection(db, 'requests'), data);
+            localStorage.setItem('shMyRequest', ref.id);
+            toast('تم إرسال طلبك بنجاح');
+        }
+        renderJoin();
+    } catch (err) { console.error(err); toast('تعذر إرسال الطلب'); }
+};
+
+/* ===== المفضلة ===== */
+window.toggleFav = function(id) {
+    let favs = getFavs();
+    if (favs.includes(id)) { favs = favs.filter(f => f !== id); toast('انحذف من مفضلتك'); }
+    else { favs.push(id); toast('انحفظ بمفضلتك'); }
+    localStorage.setItem('shFavs', JSON.stringify(favs));
+    updateFavCount(); renderFavs(); renderDriversList();
+    if (currentSheetId === id) updateSheetFav(id);
+};
+function updateFavCount() {
+    const n = getFavs().length;
+    const el = document.getElementById('favCount');
+    el.style.display = n ? 'flex' : 'none';
+    el.textContent = n;
+}
+
+/* ===== التقييم ===== */
+window.rateDriver = async function(id, value) {
+    const rated = getRated();
+    if (rated[id]) { toast('سبق وقيّمت هذا السواق'); return; }
+    const d = driversData.find(x => x.id === id);
+    if (!d) return;
+    const count = d.ratingCount || 0;
+    const avg = d.rating || 0;
+    const newCount = count + 1;
+    const newAvg = Math.round(((avg * count + value) / newCount) * 10) / 10;
+    try {
+        await updateDoc(doc(db, 'drivers', id), { rating: newAvg, ratingCount: newCount });
+        rated[id] = value;
+        localStorage.setItem('shRated', JSON.stringify(rated));
+        if (d.deviceId) {
+            await addDoc(collection(db, 'notifications'), {
+                title: 'تقييم جديد على ملفك',
+                body: `استلمت تقييم ${value} من 5 نجوم على ملفك بالسواق`,
+                target: d.deviceId, type: 'star', createdAt: Date.now()
+            });
+        }
+        toast('شكراً! تقييمك انسجل');
+        buildRateBox(id);
+    } catch (e) { toast('تعذر حفظ التقييم'); }
+};
+function buildRateBox(id) {
+    const myRate = getRated()[id];
+    const box = document.getElementById('rateStars');
+    const note = document.getElementById('rateNote');
+    if (myRate) {
+        box.innerHTML = [1,2,3,4,5].map(i => `<button class="${i <= myRate ? 'lit' : ''}" disabled><i class="fas fa-star"></i></button>`).join('');
+        note.textContent = 'تقييمك: ' + myRate + ' من 5 .. شكراً لمشاركتك';
+    } else {
+        box.innerHTML = [1,2,3,4,5].map(i => `<button onclick="rateDriver('${id}', ${i})"><i class="fas fa-star"></i></button>`).join('');
+        note.textContent = 'اضغط على النجم اللي يناسب تجربة السواق';
+    }
+}
+
+/* ===== المشاركة ===== */
+window.shareDriver = async function(id) {
+    const d = driversData.find(x => x.id === id);
+    if (!d) return;
+    const text = 'سواق بالشرقاط: ' + d.name +
+        '\nالسيارة: ' + (d.carModel || d.carType) +
+        '\nالمناطق: ' + (d.areas || []).join('، ') +
+        ((d.outTrips || []).length ? '\nمشاوير خارج المدينة: ' + d.outTrips.join('، ') : '') +
+        '\nللتواصل: ' + d.phone +
+        '\nعبر تطبيق شرقاطنا';
+    if (navigator.share) { try { await navigator.share({ title: 'شرقاطنا', text }); } catch (e) {} }
+    else window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+};
+
+/* ===== العرض ===== */
+function starsHtml(rating) {
+    let h = '';
+    for (let i = 1; i <= 5; i++) {
+        if (rating >= i) h += '<i class="fas fa-star"></i>';
+        else if (rating >= i - 0.5) h += '<i class="fas fa-star-half-stroke"></i>';
+        else h += '<i class="far fa-star"></i>';
+    }
+    return h + `<span class="num">${rating || 0}</span>`;
+}
+
+function driverCardHtml(d, i) {
+    const isFav = getFavs().includes(d.id);
+    return `
+    <div class="driver-card" style="animation-delay:${i * 0.06}s" onclick="openDriver('${d.id}')">
+        <button class="fav-btn ${isFav ? 'on' : ''}" onclick="event.stopPropagation(); toggleFav('${d.id}')"><i class="fas fa-heart"></i></button>
+        <div class="dc-head">
+            <div class="dc-avatar">${d.name.charAt(0)}</div>
+            <div class="dc-info">
+                <h3>${d.name} ${d.verified ? '<span class="verified-badge"><i class="fas fa-certificate"></i> موثّق</span>' : ''}</h3>
+                <div class="stars">${starsHtml(d.rating || 0)}</div>
+            </div>
+            <div class="dc-status ${d.available ? 'on' : 'off'}"><span class="dot"></span>${d.available ? 'متاح' : 'مشغول'}</div>
+        </div>
+        <div class="dc-body">
+            <div class="dc-row"><i class="fas fa-car"></i><span>${d.carModel || d.carType}</span></div>
+            <div class="dc-row"><i class="fas fa-map-location-dot"></i><div class="dc-tags">${(d.areas || []).map(a => `<span class="dc-tag">${a}</span>`).join('') || 'غير محدد'}</div></div>
+            ${(d.outTrips || []).length ? `<div class="dc-row"><i class="fas fa-road"></i><div class="dc-tags">${d.outTrips.map(a => `<span class="out-tag">${a}</span>`).join('')}</div></div>` : ''}
+            ${(d.services || []).length ? `<div class="dc-row"><i class="fas fa-concierge-bell"></i><div class="dc-tags">${d.services.map(s => `<span class="svc-tag">${s}</span>`).join('')}</div></div>` : ''}
+        </div>
+        <div class="dc-footer">
+            <span class="hint"><i class="fas fa-hand-pointer"></i> اضغط تشوف التفاصيل والتواصل</span>
+            <button class="dc-open">التفاصيل <i class="fas fa-chevron-left"></i></button>
+        </div>
+    </div>`;
+}
+
+function renderHome() {
+    document.getElementById('hDrivers').textContent = driversData.length;
+    document.getElementById('hAreas').textContent = areasData.length;
+    document.getElementById('hCars').textContent = carsData.length;
+    const top = [...driversData].sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 5);
+    document.getElementById('topRatedScroll').innerHTML = top.length ? top.map((d, i) => `
+        <div class="top-card" onclick="openDriver('${d.id}')">
+            <div class="rank-badge rb-${Math.min(i + 1, 3)}">${i + 1}</div>
+            <div class="top-avatar">${d.name.charAt(0)}</div>
+            <h4>${d.name}</h4>
+            <div class="car-line"><i class="fas fa-car"></i> ${d.carModel || d.carType}</div>
+            <div class="stars">${starsHtml(d.rating || 0)}</div>
+        </div>`).join('')
+        : `<div class="empty" style="width:100%"><i class="fas fa-trophy"></i><h4>ماكو بيانات بعد</h4><p>السواق يظهر هنا أول ما يتضاف</p></div>`;
+    const avail = driversData.filter(d => d.available).slice(0, 2);
+    document.getElementById('availablePreview').innerHTML = avail.map((d, i) => driverCardHtml(d, i)).join('');
+}
+
+function renderChips() {
+    document.getElementById('areaChips').innerHTML =
+        `<button class="chip ${currentArea === 'all' ? 'active' : ''}" onclick="setArea('all')"><i class="fas fa-globe"></i> الكل</button>` +
+        areasData.map(a => `<button class="chip ${currentArea === a.name ? 'active' : ''}" onclick="setArea('${a.name}')"><i class="fas fa-location-dot"></i> ${a.name}</button>`).join('');
+    document.getElementById('carChips').innerHTML =
+        `<button class="chip ${currentCar === 'all' ? 'active' : ''}" onclick="setCar('all')"><i class="fas fa-th"></i> الكل</button>` +
+        carsData.map(c => `<button class="chip ${currentCar === c.name ? 'active' : ''}" onclick="setCar('${c.name}')"><i class="fas ${c.icon || 'fa-car'}"></i> ${c.name}</button>`).join('');
+    document.getElementById('outChips').innerHTML =
+        `<button class="chip ${currentOut === 'all' ? 'active' : ''}" onclick="setOut('all')"><i class="fas fa-globe"></i> الكل</button>` +
+        OUT_TRIPS.map(o => `<button class="chip ${currentOut === o ? 'active' : ''}" onclick="setOut('${o}')"><i class="fas fa-route"></i> ${o}</button>`).join('');
+}
+window.setArea = a => { currentArea = a; renderChips(); renderDriversList(); };
+window.setCar = c => { currentCar = c; renderChips(); renderDriversList(); };
+window.setOut = o => { currentOut = o; renderChips(); renderDriversList(); };
+
+function renderDriversList() {
+    const list = driversData.filter(d => {
+        const okArea = currentArea === 'all' || (d.areas || []).includes(currentArea);
+        const okCar = currentCar === 'all' || d.carType === currentCar;
+        const okOut = currentOut === 'all' || (d.outTrips || []).includes(currentOut);
+        const q = searchQuery.trim();
+        const okSearch = !q || d.name.includes(q) || (d.carModel || '').includes(q) || (d.areas || []).some(a => a.includes(q)) || (d.services || []).some(s => s.includes(q)) || (d.outTrips || []).some(o => o.includes(q));
+        return okArea && okCar && okOut && okSearch;
+    }).sort((a, b) => (b.rating || 0) - (a.rating || 0));
+    document.getElementById('resultsCount').textContent = list.length;
+    document.getElementById('driversList').innerHTML = list.length
+        ? list.map((d, i) => driverCardHtml(d, i)).join('')
+        : `<div class="empty"><i class="fas fa-user-slash"></i><h4>ماكو سواق يطابق بحثك</h4><p>جرب تغير الفلاتر أو كلمة البحث</p></div>`;
+}
+document.getElementById('searchInput').addEventListener('input', e => { searchQuery = e.target.value; renderDriversList(); });
+
+function renderFavs() {
+    const favs = driversData.filter(d => getFavs().includes(d.id));
+    document.getElementById('favsList').innerHTML = favs.length
+        ? favs.map((d, i) => driverCardHtml(d, i)).join('')
+        : `<div class="empty"><i class="fas fa-heart-crack"></i><h4>مفضلتك فارغة</h4><p>اضغط على القلب بأي بطاقة سواق حتى تحفظه هنا</p></div>`;
+}
+
+function renderAreas() {
+    const icons = ['fa-city', 'fa-location-dot', 'fa-store', 'fa-industry', 'fa-tractor', 'fa-hospital', 'fa-graduation-cap', 'fa-road'];
+    document.getElementById('areasGrid').innerHTML = areasData.length ? areasData.map((a, i) => {
+        const count = driversData.filter(d => (d.areas || []).includes(a.name)).length;
+        return `<div class="area-card" style="animation-delay:${i * 0.05}s" onclick="openArea('${a.name}')"><i class="fas ${icons[i % icons.length]}"></i><h4>${a.name}</h4><p>${count} سواق</p></div>`;
+    }).join('') : `<div class="empty" style="grid-column:1/-1"><i class="fas fa-map"></i><h4>ماكو مناطق بعد</h4><p>المناطق تنضاف من لوحة التحكم</p></div>`;
+}
+window.openArea = function(name) {
+    currentArea = name;
+    showPage('drivers');
+    renderChips(); renderDriversList();
+    toast('عرض سواق منطقة ' + name);
+};
+
+/* ===== شيت التفاصيل ===== */
+window.openDriver = function(id) {
+    const d = driversData.find(x => x.id === id);
+    if (!d) return;
+    currentSheetId = id;
+    document.getElementById('shAvatar').textContent = d.name.charAt(0);
+    document.getElementById('shName').innerHTML = d.name + (d.verified ? ' <span class="verified-badge"><i class="fas fa-certificate"></i> موثّق</span>' : '');
+    document.getElementById('shStars').innerHTML = starsHtml(d.rating || 0);
+    document.getElementById('shCar').textContent = (d.carModel || '') + ' - ' + (d.carType || '');
+    document.getElementById('shPhone').textContent = d.phone;
+    document.getElementById('shAreas').innerHTML = (d.areas || []).map(a => `<span class="dc-tag">${a}</span>`).join('');
+    const outRow = document.getElementById('shOutRow');
+    if ((d.outTrips || []).length) { outRow.style.display = 'flex'; document.getElementById('shOut').innerHTML = d.outTrips.map(o => `<span class="out-tag">${o}</span>`).join(''); }
+    else outRow.style.display = 'none';
+    const svcRow = document.getElementById('shSvcRow');
+    if ((d.services || []).length) { svcRow.style.display = 'flex'; document.getElementById('shSvc').innerHTML = d.services.map(s => `<span class="svc-tag">${s}</span>`).join(''); }
+    else svcRow.style.display = 'none';
+    document.getElementById('shCall').href = 'tel:' + d.phone;
+    document.getElementById('shWa').href = 'https://wa.me/964' + d.phone.replace(/\D/g, '').replace(/^0/, '');
+    document.getElementById('shShare').onclick = () => shareDriver(id);
+    document.getElementById('shFav').onclick = () => toggleFav(id);
+    updateSheetFav(id);
+    buildRateBox(id);
+    document.getElementById('driverSheet').classList.add('open');
+};
+function updateSheetFav(id) {
+    const btn = document.getElementById('shFav');
+    const on = getFavs().includes(id);
+    btn.classList.toggle('on', on);
+    btn.innerHTML = on ? '<i class="fas fa-heart"></i> محفوظ' : '<i class="far fa-heart"></i> مفضلة';
+}
+document.getElementById('driverSheet').addEventListener('click', e => { if (e.target.id === 'driverSheet') { e.target.classList.remove('open'); currentSheetId = null; } });
+
+function toast(msg) {
+    const t = document.getElementById('toast');
+    t.innerHTML = `<i class="fas fa-circle-info"></i> ${msg}`;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function renderAll() {
+    renderHome(); renderChips(); renderDriversList(); renderAreas(); renderFavs(); updateFavCount(); updateBell();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>شرقاطنا | لوحة التحكم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root { --primary:#1E3A8A; --primary-light:#3B82F6; --accent:#F59E0B; --bg:#F1F5F9; --white:#FFF; --success:#10B981; --danger:#EF4444; --text:#1F2937; --text-light:#6B7280; --border:#E5E7EB; --shadow:0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg:0 10px 15px -3px rgba(0,0,0,0.1); }
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo',sans-serif; -webkit-tap-highlight-color:transparent; }
+body { background:var(--bg); color:var(--text); padding-bottom:95px; }
+.header { background:linear-gradient(135deg,var(--primary) 0%,var(--primary-light) 100%); color:var(--white); padding:18px 20px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; box-shadow:var(--shadow-lg); }
+.header-title { display:flex; align-items:center; gap:12px; }
+.header-logo { width:42px; height:42px; background:white; border-radius:12px; display:flex; align-items:center; justify-content:center; }
+.header-logo i { color:var(--primary); font-size:20px; }
+.header-title h1 { font-size:18px; font-weight:800; line-height:1.2; }
+.header-title p { font-size:11px; opacity:0.85; }
+.header-logout { width:40px; height:40px; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); border-radius:10px; color:white; font-size:16px; cursor:pointer; }
+#loginScreen { position:fixed; inset:0; background:linear-gradient(160deg,var(--primary) 0%,var(--primary-light) 100%); display:flex; align-items:center; justify-content:center; z-index:9999; padding:20px; }
+.login-box { background:white; padding:35px 25px; border-radius:24px; width:100%; max-width:380px; text-align:center; box-shadow:0 25px 60px rgba(0,0,0,0.35); }
+.login-logo { width:80px; height:80px; margin:0 auto 18px; background:linear-gradient(135deg,var(--primary),var(--primary-light)); border-radius:22px; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 25px rgba(30,58,138,0.35); }
+.login-logo i { color:white; font-size:34px; }
+.login-box h2 { font-size:24px; font-weight:900; color:var(--primary); margin-bottom:4px; }
+.login-box .sub { color:var(--text-light); font-size:13px; font-weight:600; margin-bottom:25px; }
+.login-input { width:100%; padding:14px 18px; border:2px solid var(--border); border-radius:12px; font-size:15px; margin-bottom:15px; text-align:center; }
+.login-input:focus { outline:none; border-color:var(--primary); }
+.login-btn { width:100%; padding:14px; background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:white; border:none; border-radius:12px; font-size:16px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px; }
+.login-error { color:var(--danger); font-size:13px; font-weight:700; margin-top:12px; display:none; }
+.page { display:none; padding:16px; max-width:700px; margin:0 auto; animation:fadeIn 0.3s ease; }
+.page.active { display:block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.page-title { font-size:20px; font-weight:900; color:var(--primary); margin:10px 0 16px; display:flex; align-items:center; gap:10px; }
+.page-title i { color:var(--accent); }
+.stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+.stat-card { background:white; border-radius:16px; padding:18px 15px; box-shadow:var(--shadow); text-align:center; border-bottom:4px solid var(--primary); }
+.stat-card.green { border-bottom-color:var(--success); }
+.stat-card.orange { border-bottom-color:var(--accent); }
+.stat-card.gold { border-bottom-color:#FBBF24; }
+.stat-card i { font-size:24px; color:var(--primary); margin-bottom:8px; }
+.stat-card.green i { color:var(--success); }
+.stat-card.orange i { color:var(--accent); }
+.stat-card.gold i { color:#FBBF24; }
+.stat-card h3 { font-size:26px; font-weight:900; color:var(--primary); line-height:1; }
+.stat-card p { font-size:12px; color:var(--text-light); font-weight:700; margin-top:6px; }
+.top-section { background:white; border-radius:16px; padding:18px; box-shadow:var(--shadow); }
+.top-title { font-size:16px; font-weight:800; color:var(--primary); display:flex; align-items:center; gap:8px; margin-bottom:15px; }
+.top-title i { color:var(--accent); }
+.top-item { display:flex; align-items:center; gap:12px; padding:12px; border-radius:12px; background:var(--bg); margin-bottom:10px; }
+.top-item:last-child { margin-bottom:0; }
+.top-rank { width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:16px; color:white; flex-shrink:0; }
+.rank-1 { background:linear-gradient(135deg,#F59E0B,#D97706); }
+.rank-2 { background:linear-gradient(135deg,#94A3B8,#64748B); }
+.rank-3 { background:linear-gradient(135deg,#B45309,#92400E); }
+.top-info { flex:1; }
+.top-info h4 { font-size:14px; font-weight:800; }
+.top-info p { font-size:12px; color:var(--text-light); font-weight:600; }
+.top-rating { color:var(--accent); font-weight:900; font-size:15px; }
+.search-wrap { position:relative; margin-bottom:15px; }
+.search-wrap input { width:100%; padding:13px 45px 13px 15px; border:2px solid var(--border); border-radius:12px; background:white; font-size:14px; }
+.search-wrap input:focus { outline:none; border-color:var(--primary); }
+.search-wrap i { position:absolute; right:16px; top:50%; transform:translateY(-50%); color:var(--text-light); }
+.list-item { background:white; border-radius:16px; padding:16px; box-shadow:var(--shadow); margin-bottom:12px; }
+.item-head { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+.item-avatar { width:48px; height:48px; border-radius:14px; background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:white; font-size:20px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.item-avatar.orange { background:linear-gradient(135deg,var(--accent),#D97706); }
+.item-head-info { flex:1; }
+.item-head-info h4 { font-size:15px; font-weight:800; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+.item-head-info p { font-size:12px; color:var(--text-light); font-weight:600; }
+.badge { padding:3px 10px; border-radius:20px; font-size:11px; font-weight:800; }
+.badge-on { background:#D1FAE5; color:#065F46; }
+.badge-off { background:#FEE2E2; color:#991B1B; }
+.badge-verified { background:linear-gradient(135deg,#F59E0B,#D97706); color:white; }
+.badge-pending { background:#FEF3C7; color:#92400E; }
+.item-details { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+.detail-row { display:flex; align-items:center; gap:10px; font-size:13px; font-weight:600; color:var(--text-light); }
+.detail-row i { width:16px; color:var(--primary); }
+.tags { display:flex; flex-wrap:wrap; gap:6px; }
+.tag { background:#DBEAFE; color:var(--primary); padding:4px 10px; border-radius:20px; font-size:11px; font-weight:700; }
+.tag.out { background:#F3E8FF; color:#6B21A8; }
+.tag.svc { background:#FEF3C7; color:#92400E; }
+.item-actions { display:flex; gap:8px; border-top:1px solid var(--border); padding-top:12px; }
+.act-btn { flex:1; padding:9px; border:none; border-radius:10px; font-size:12px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; font-family:'Cairo',sans-serif; }
+.act-edit { background:#DBEAFE; color:var(--primary); }
+.act-toggle { background:#D1FAE5; color:#065F46; }
+.act-toggle.off { background:#FEF3C7; color:#92400E; }
+.act-del { background:#FEE2E2; color:var(--danger); }
+.act-ok { background:linear-gradient(135deg,var(--success),#059669); color:white; }
+.empty { text-align:center; padding:50px 20px; color:var(--text-light); }
+.empty i { font-size:50px; color:var(--border); margin-bottom:15px; }
+.empty h4 { font-size:16px; font-weight:800; color:var(--text); margin-bottom:5px; }
+.bottom-nav { position:fixed; bottom:0; left:0; right:0; background:white; display:flex; align-items:flex-end; box-shadow:0 -5px 25px rgba(0,0,0,0.1); z-index:200; padding-bottom:env(safe-area-inset-bottom); border-radius:20px 20px 0 0; }
+.nav-item { flex:1; background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px; padding:12px 0 10px; color:#94A3B8; font-size:9.5px; font-weight:800; font-family:'Cairo',sans-serif; transition:0.3s; position:relative; }
+.nav-item i { font-size:18px; transition:0.3s; }
+.nav-item.active { color:var(--primary); }
+.nav-item.active i { transform:translateY(-3px); }
+.req-badge { position:absolute; top:4px; left:50%; margin-left:2px; min-width:16px; height:16px; background:var(--danger); color:white; border-radius:10px; font-size:9px; font-weight:900; display:flex; align-items:center; justify-content:center; padding:0 4px; }
+.fab-slot { flex:1; display:flex; justify-content:center; position:relative; }
+.fab { position:absolute; top:-26px; width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,var(--accent),#D97706); color:white; border:4px solid white; font-size:20px; cursor:pointer; box-shadow:0 8px 20px rgba(245,158,11,0.45); transition:0.3s; }
+.fab.open { transform:rotate(45deg); }
+.fab-menu { position:fixed; bottom:100px; left:50%; transform:translateX(-50%) translateY(15px); background:white; border-radius:18px; box-shadow:0 15px 45px rgba(0,0,0,0.25); padding:8px; min-width:230px; opacity:0; visibility:hidden; transition:0.3s; z-index:199; }
+.fab-menu.open { opacity:1; visibility:visible; transform:translateX(-50%) translateY(0); }
+.fab-menu button { width:100%; display:flex; align-items:center; gap:12px; padding:13px 15px; border:none; background:none; border-radius:12px; cursor:pointer; font-size:14px; font-weight:800; color:var(--text); font-family:'Cairo',sans-serif; }
+.fab-menu button:hover { background:var(--bg); }
+.fab-menu button i { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; color:white; font-size:14px; }
+.icon-blue { background:var(--primary); } .icon-green { background:var(--success); } .icon-orange { background:var(--accent); }
+.modal { position:fixed; inset:0; background:rgba(15,23,42,0.6); z-index:300; display:none; align-items:flex-end; justify-content:center; }
+.modal.active { display:flex; }
+.modal-content { background:white; width:100%; max-width:500px; border-radius:24px 24px 0 0; padding:20px; max-height:88vh; overflow-y:auto; animation:slideUp 0.35s cubic-bezier(0.16,1,0.3,1); }
+@keyframes slideUp { from { transform:translateY(100%); } to { transform:translateY(0); } }
+.modal-handle { width:45px; height:5px; background:var(--border); border-radius:10px; margin:0 auto 18px; }
+.modal-title { font-size:18px; font-weight:900; color:var(--primary); margin-bottom:18px; display:flex; align-items:center; gap:10px; }
+.modal-title i { color:var(--accent); }
+.form-group { margin-bottom:14px; }
+.form-group label { display:block; font-size:13px; font-weight:800; margin-bottom:6px; color:var(--text); }
+.form-group input, .form-group select { width:100%; padding:12px 14px; border:2px solid var(--border); border-radius:12px; font-size:14px; font-family:'Cairo',sans-serif; }
+.form-group input:focus, .form-group select:focus { outline:none; border-color:var(--primary); }
+.check-group { display:flex; flex-wrap:wrap; gap:8px; }
+.check-item { display:flex; align-items:center; gap:6px; background:var(--bg); padding:8px 12px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; border:2px solid transparent; }
+.check-item:has(input:checked) { background:#DBEAFE; border-color:var(--primary); color:var(--primary); }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.save-btn { width:100%; padding:14px; margin-top:8px; background:linear-gradient(135deg,var(--primary),var(--primary-light)); color:white; border:none; border-radius:12px; font-size:15px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; font-family:'Cairo',sans-serif; }
+.toast { position:fixed; top:20px; left:50%; transform:translateX(-50%) translateY(-120px); padding:12px 25px; border-radius:30px; color:white; font-size:14px; font-weight:800; z-index:9999; transition:0.4s; display:flex; align-items:center; gap:8px; box-shadow:0 10px 30px rgba(0,0,0,0.25); max-width:90%; }
+.toast.show { transform:translateX(-50%) translateY(0); }
+.toast.success { background:var(--success); } .toast.error { background:var(--danger); } .toast.warn { background:#D97706; }
+@media (min-width:768px) { .stats-grid { grid-template-columns:repeat(4,1fr); } }
+</style>
+</head>
+<body>
+
+<div id="loginScreen">
+    <div class="login-box">
+        <div class="login-logo"><i class="fas fa-shield-halved"></i></div>
+        <h2>شرقاطنا</h2>
+        <p class="sub">لوحة التحكم الإدارية</p>
+        <input type="password" class="login-input" id="adminPassword" placeholder="كلمة المرور">
+        <button class="login-btn" onclick="checkLogin()"><i class="fas fa-right-to-bracket"></i> تسجيل الدخول</button>
+        <p class="login-error" id="loginError">كلمة المرور غير صحيحة</p>
+    </div>
+</div>
+
+<header class="header" id="mainHeader" style="display:none;">
+    <div class="header-title">
+        <div class="header-logo"><i class="fas fa-car-side"></i></div>
+        <div><h1>شرقاطنا</h1><p>لوحة التحكم الإدارية</p></div>
+    </div>
+    <button class="header-logout" onclick="logout()"><i class="fas fa-right-from-bracket"></i></button>
+</header>
+
+<div class="page active" id="page-dashboard">
+    <h2 class="page-title"><i class="fas fa-chart-pie"></i> لوحة المعلومات</h2>
+    <div class="stats-grid">
+        <div class="stat-card"><i class="fas fa-users"></i><h3 id="stDrivers">0</h3><p>إجمالي السواق</p></div>
+        <div class="stat-card green"><i class="fas fa-circle-check"></i><h3 id="stAvailable">0</h3><p>سواق متاح</p></div>
+        <div class="stat-card gold"><i class="fas fa-certificate"></i><h3 id="stVerified">0</h3><p>سواق موثّق</p></div>
+        <div class="stat-card orange"><i class="fas fa-inbox"></i><h3 id="stPending">0</h3><p>طلبات معلقة</p></div>
+    </div>
+
+    <div class="top-section" style="margin-bottom:16px">
+        <div class="top-title"><i class="fas fa-key"></i> إعدادات الإشعارات الخارجية OneSignal</div>
+        <p style="font-size:12px;color:var(--text-light);font-weight:600;margin-bottom:10px">الصق مفتاح REST API مرة وحدة وينحفظ بهالجهاز فقط، حتى ما ينكشف بأي ملف منشور</p>
+        <div class="form-group"><input type="text" id="osKeyInput" placeholder="REST API Key من إعدادات OneSignal"></div>
+        <button class="save-btn" onclick="saveOsKey()"><i class="fas fa-floppy-disk"></i> حفظ المفتاح</button>
+        <div style="margin-top:10px" id="osStatus"></div>
+    </div>
+
+    <div class="top-section" style="margin-bottom:16px">
+        <div class="top-title"><i class="fas fa-bullhorn"></i> إرسال إشعار لكل المستخدمين</div>
+        <div class="form-group"><label>عنوان الإشعار</label><input type="text" id="bcTitle" placeholder="مثال: سواق جدد انضافوا للتطبيق"></div>
+        <div class="form-group"><label>نص الإشعار</label><input type="text" id="bcBody" placeholder="اكتب الخبر اللي تريد توصله للناس"></div>
+        <button class="save-btn" onclick="sendBroadcast()"><i class="fas fa-paper-plane"></i> إرسال الإشعار هسة</button>
+    </div>
+
+    <div class="top-section">
+        <div class="top-title"><i class="fas fa-trophy"></i> أكثر السواق تقييماً</div>
+        <div id="topRatedList"></div>
+    </div>
+</div>
+
+<div class="page" id="page-requests">
+    <h2 class="page-title"><i class="fas fa-inbox"></i> طلبات الانضمام المعلقة</h2>
+    <div id="pendingList"></div>
+    <h2 class="page-title" style="margin-top:26px"><i class="fas fa-clock-rotate-left"></i> سجل الطلبات</h2>
+    <div id="historyList"></div>
+</div>
+
+<div class="page" id="page-drivers">
+    <h2 class="page-title"><i class="fas fa-users"></i> إدارة السواق</h2>
+    <div class="search-wrap"><i class="fas fa-magnifying-glass"></i><input type="text" id="driverSearch" placeholder="ابحث عن سواق..." oninput="renderDrivers()"></div>
+    <div id="driversList"></div>
+</div>
+
+<div class="page" id="page-areas">
+    <h2 class="page-title"><i class="fas fa-map-location-dot"></i> إدارة المناطق</h2>
+    <div id="areasList"></div>
+</div>
+
+<div class="page" id="page-cars">
+    <h2 class="page-title"><i class="fas fa-car"></i> أنواع السيارات</h2>
+    <div id="carsList"></div>
+</div>
+
+<div class="fab-menu" id="fabMenu">
+    <button onclick="fabAction('driver')"><i class="icon-blue fas fa-user-plus"></i> إضافة سواق</button>
+    <button onclick="fabAction('area')"><i class="icon-green fas fa-location-dot"></i> إضافة منطقة</button>
+    <button onclick="fabAction('car')"><i class="icon-orange fas fa-car-side"></i> إضافة نوع سيارة</button>
+</div>
+
+<nav class="bottom-nav" id="bottomNav" style="display:none;">
+    <button class="nav-item active" data-page="dashboard" onclick="showPage('dashboard')"><i class="fas fa-house"></i>الرئيسية</button>
+    <button class="nav-item" data-page="requests" onclick="showPage('requests')"><i class="fas fa-inbox"></i>الطلبات<span class="req-badge" id="reqBadge" style="display:none">0</span></button>
+    <button class="nav-item" data-page="drivers" onclick="showPage('drivers')"><i class="fas fa-users"></i>السواق</button>
+    <div class="fab-slot"><button class="fab" id="fabBtn" onclick="toggleFab()"><i class="fas fa-plus"></i></button></div>
+    <button class="nav-item" data-page="areas" onclick="showPage('areas')"><i class="fas fa-map-location-dot"></i>المناطق</button>
+    <button class="nav-item" data-page="cars" onclick="showPage('cars')"><i class="fas fa-car"></i>السيارات</button>
+</nav>
+
+<div class="modal" id="driverModal">
+    <div class="modal-content">
+        <div class="modal-handle"></div>
+        <h3 class="modal-title"><i class="fas fa-user-plus"></i> <span id="driverModalTitle">إضافة سواق جديد</span></h3>
+        <form onsubmit="saveDriver(event)">
+            <input type="hidden" id="driverId">
+            <div class="form-group"><label>الاسم الكامل</label><input type="text" id="driverName" required></div>
+            <div class="form-row">
+                <div class="form-group"><label>رقم الهاتف</label><input type="tel" id="driverPhone" required></div>
+                <div class="form-group"><label>التقييم الابتدائي (0-5)</label><input type="number" id="driverRating" min="0" max="5" step="0.1" value="5"></div>
+            </div>
+            <div class="form-group"><label>نوع السيارة</label><select id="driverCarType" required></select></div>
+            <div class="form-group"><label>موديل السيارة</label><input type="text" id="driverCarModel" required placeholder="مثال: تويوتا كورولا 2020"></div>
+            <div class="form-group"><label>مناطق النقل داخل الشرقاط</label><div class="check-group" id="driverAreas"></div></div>
+            <div class="form-group"><label>مشاوير خارج المدينة</label><div class="check-group" id="driverOutTrips"></div></div>
+            <div class="form-group"><label>خدمات إضافية</label><div class="check-group" id="driverServices"></div></div>
+            <div class="form-row">
+                <div class="form-group"><label>حالة التوفر</label><select id="driverAvailable"><option value="true">متاح</option><option value="false">غير متاح</option></select></div>
+                <div class="form-group"><label>التوثيق</label><select id="driverVerified"><option value="false">غير موثّق</option><option value="true">موثّق</option></select></div>
+            </div>
+            <button type="submit" class="save-btn"><i class="fas fa-floppy-disk"></i> حفظ البيانات</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal" id="areaModal">
+    <div class="modal-content">
+        <div class="modal-handle"></div>
+        <h3 class="modal-title"><i class="fas fa-location-dot"></i> إضافة منطقة جديدة</h3>
+        <form onsubmit="saveArea(event)">
+            <div class="form-group"><label>اسم المنطقة</label><input type="text" id="areaName" required placeholder="مثال: الخصم"></div>
+            <button type="submit" class="save-btn"><i class="fas fa-floppy-disk"></i> حفظ المنطقة</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal" id="carModal">
+    <div class="modal-content">
+        <div class="modal-handle"></div>
+        <h3 class="modal-title"><i class="fas fa-car-side"></i> إضافة نوع سيارة</h3>
+        <form onsubmit="saveCar(event)">
+            <div class="form-group"><label>اسم النوع</label><input type="text" id="carName" required placeholder="مثال: كورولا"></div>
+            <div class="form-group"><label>الأيقونة</label>
+                <select id="carIcon">
+                    <option value="fa-car">سيارة</option><option value="fa-car-side">سيارة جانبية</option>
+                    <option value="fa-truck">نقل خفيف</option><option value="fa-truck-moving">نقل ثقيل</option>
+                    <option value="fa-van-shuttle">حافلة صغيرة</option>
+                </select>
+            </div>
+            <button type="submit" class="save-btn"><i class="fas fa-floppy-disk"></i> حفظ النوع</button>
+        </form>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBcy1utI3B8T9LWMSLX8X7K37N1YvviKVE",
+    authDomain: "sharqatna.firebaseapp.com",
+    projectId: "sharqatna",
+    storageBucket: "sharqatna.firebasestorage.app",
+    messagingSenderId: "601274372954",
+    appId: "1:601274372954:web:d4ef37d602dd050b7b5963",
+    measurementId: "G-CDDH1GLN71"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const ONESIGNAL_APP_ID = '017ed702-163e-41f6-9dbc-50e2aa29c926';
+const OUT_TRIPS = ['بغداد', 'موصل', 'تكريت', 'سامراء', 'كركوك'];
+const SERVICES = ['توصيل طلاب', 'توصيل طلبات', 'نقل أثاث', 'تأجير خاص', 'مناوبات'];
+
+let driversData = [], areasData = [], carsData = [], requestsData = [];
+let currentPage = 'dashboard';
+
+function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.className = 'toast show ' + type;
+    t.innerHTML = `<i class="fas ${type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-circle-xmark' : 'fa-triangle-exclamation'}"></i> ${msg}`;
+    setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+/* ===== OneSignal REST ===== */
+window.saveOsKey = function() {
+    const k = document.getElementById('osKeyInput').value.trim();
+    if (!k) { showToast('الصق المفتاح أولاً', 'warn'); return; }
+    localStorage.setItem('shOnesignalKey', k);
+    document.getElementById('osKeyInput').value = '';
+    updateOsStatus();
+    showToast('تم حفظ مفتاح الإشعارات بهالجهاز');
+};
+function updateOsStatus() {
+    const on = !!localStorage.getItem('shOnesignalKey');
+    document.getElementById('osStatus').innerHTML = on
+        ? '<span class="badge badge-on">الإشعارات الخارجية مفعّلة</span>'
+        : '<span class="badge badge-off">مفتاح REST غير محفوظ - الإشعارات داخل التطبيق فقط</span>';
+}
+async function sendPush(title, body, externalId) {
+    const key = localStorage.getItem('shOnesignalKey');
+    if (!key) return false;
+    const payload = { app_id: ONESIGNAL_APP_ID, headings: { en: title }, contents: { en: body } };
+    if (externalId) {
+        payload.target_channel = 'external_id';
+        payload.include_aliases = { external_id: [externalId] };
+    } else {
+        payload.included_segments = ['Subscribed'];
+    }
+    try {
+        const res = await fetch('https://onesignal.com/api/v1/notifications', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Basic ' + key },
+            body: JSON.stringify(payload)
+        });
+        return res.ok;
+    } catch (e) { return false; }
+}
+
+window.checkLogin = function() {
+    if (document.getElementById('adminPassword').value === 'shirqat2026') {
+        localStorage.setItem('sharqatAdmin', '1');
+        enterApp();
+    } else document.getElementById('loginError').style.display = 'block';
+};
+window.logout = () => { localStorage.removeItem('sharqatAdmin'); location.reload(); };
+function enterApp() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('mainHeader').style.display = 'flex';
+    document.getElementById('bottomNav').style.display = 'flex';
+    updateOsStatus();
+    refreshAll();
+}
+if (localStorage.getItem('sharqatAdmin') === '1') enterApp();
+
+onSnapshot(collection(db, 'requests'), snap => {
+    requestsData = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+    renderRequests(); updateReqBadge();
+    if (currentPage === 'dashboard') renderDashboard();
+});
+
+window.showPage = function(page) {
+    currentPage = page;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.page === page));
+    closeFab(); renderCurrent(); window.scrollTo(0, 0);
+};
+window.toggleFab = function() {
+    document.getElementById('fabMenu').classList.toggle('open');
+    document.getElementById('fabBtn').classList.toggle('open');
+};
+function closeFab() {
+    document.getElementById('fabMenu').classList.remove('open');
+    document.getElementById('fabBtn').classList.remove('open');
+}
+window.fabAction = function(type) {
+    closeFab();
+    if (type === 'driver') {
+        if (!areasData.length || !carsData.length) { showToast('أضف المناطق وأنواع السيارات أولاً', 'warn'); return; }
+        openDriverModal();
+    }
+    if (type === 'area') document.getElementById('areaModal').classList.add('active');
+    if (type === 'car') document.getElementById('carModal').classList.add('active');
+};
+
+async function refreshAll() {
+    try {
+        const [dSnap, aSnap, cSnap] = await Promise.all([
+            getDocs(collection(db, 'drivers')),
+            getDocs(collection(db, 'areas')),
+            getDocs(collection(db, 'carTypes'))
+        ]);
+        driversData = dSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+        areasData = aSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+        carsData = cSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderCurrent();
+    } catch (e) { console.error(e); showToast('خطأ بالاتصال بقاعدة البيانات', 'error'); }
+}
+function renderCurrent() {
+    if (currentPage === 'dashboard') renderDashboard();
+    if (currentPage === 'requests') renderRequests();
+    if (currentPage === 'drivers') renderDrivers();
+    if (currentPage === 'areas') renderAreas();
+    if (currentPage === 'cars') renderCars();
+}
+
+function updateReqBadge() {
+    const n = requestsData.filter(r => !r.status || r.status === 'pending').length;
+    const el = document.getElementById('reqBadge');
+    el.style.display = n ? 'flex' : 'none';
+    el.textContent = n;
+}
+
+function renderDashboard() {
+    document.getElementById('stDrivers').textContent = driversData.length;
+    document.getElementById('stAvailable').textContent = driversData.filter(d => d.available).length;
+    document.getElementById('stVerified').textContent = driversData.filter(d => d.verified).length;
+    document.getElementById('stPending').textContent = requestsData.filter(r => !r.status || r.status === 'pending').length;
+    const top = [...driversData].sort((a, b) => (b.rating || 0) - (a.rating || 0)).slice(0, 3);
+    document.getElementById('topRatedList').innerHTML = top.length ? top.map((d, i) => `
+        <div class="top-item">
+            <div class="top-rank rank-${i + 1}">${i + 1}</div>
+            <div class="top-info"><h4>${d.name} ${d.verified ? '<span class="badge badge-verified">موثّق</span>' : ''}</h4><p>${d.carModel || ''}</p></div>
+            <div class="top-rating"><i class="fas fa-star"></i> ${d.rating || 0}</div>
+        </div>`).join('')
+        : `<div class="empty"><i class="fas fa-trophy"></i><h4>ماكو سواق بعد</h4><p>أضف سواق ليظهرون هنا</p></div>`;
+}
+
+/* ===== إشعار عام ===== */
+window.sendBroadcast = async function() {
+    const title = document.getElementById('bcTitle').value.trim();
+    const body = document.getElementById('bcBody').value.trim();
+    if (!title || !body) { showToast('اكتب العنوان والنص أولاً', 'warn'); return; }
+    try {
+        await addDoc(collection(db, 'notifications'), { title, body, target: 'all', type: 'megaphone', createdAt: Date.now() });
+        const pushed = await sendPush(title, body, null);
+        document.getElementById('bcTitle').value = '';
+        document.getElementById('bcBody').value = '';
+        showToast(pushed ? 'وصل الإشعار داخل التطبيق وخارجه' : 'انحفظ الإشعار داخل التطبيق (ماكو مفتاح REST)');
+    } catch (e) { showToast('تعذر إرسال الإشعار', 'error'); }
+};
+
+/* ===== الطلبات ===== */
+function requestItemHtml(r, withActions) {
+    return `
+    <div class="list-item">
+        <div class="item-head">
+            <div class="item-avatar orange">${(r.name || '؟').charAt(0)}</div>
+            <div class="item-head-info">
+                <h4>${r.name}</h4>
+                <p>${r.createdAt ? new Date(r.createdAt).toLocaleDateString('ar-IQ') : ''}</p>
+            </div>
+            ${r.status === 'approved' ? '<span class="badge badge-on">مقبول</span>' : r.status === 'rejected' ? '<span class="badge badge-off">مرفوض</span>' : '<span class="badge badge-pending">قيد المراجعة</span>'}
+        </div>
+        <div class="item-details">
+            <div class="detail-row"><i class="fas fa-phone"></i> <span style="direction:ltr">${r.phone}</span></div>
+            <div class="detail-row"><i class="fas fa-car"></i> ${r.carModel || ''} - ${r.carType || ''}</div>
+            <div class="detail-row"><i class="fas fa-map-location-dot"></i><div class="tags">${(r.areas || []).map(a => `<span class="tag">${a}</span>`).join('')}</div></div>
+            ${(r.outTrips || []).length ? `<div class="detail-row"><i class="fas fa-road"></i><div class="tags">${r.outTrips.map(o => `<span class="tag out">${o}</span>`).join('')}</div></div>` : ''}
+            ${(r.services || []).length ? `<div class="detail-row"><i class="fas fa-concierge-bell"></i><div class="tags">${r.services.map(s => `<span class="tag svc">${s}</span>`).join('')}</div></div>` : ''}
+            ${r.status === 'rejected' && r.reason ? `<div class="detail-row"><i class="fas fa-comment-slash"></i> سبب الرفض: ${r.reason}</div>` : ''}
+        </div>
+        ${withActions ? `
+        <div class="item-actions">
+            <button class="act-btn act-ok" onclick="approveRequest('${r.id}')"><i class="fas fa-check"></i> موافقة ونشر</button>
+            <button class="act-btn act-del" onclick="rejectRequest('${r.id}')"><i class="fas fa-xmark"></i> رفض</button>
+        </div>` : ''}
+    </div>`;
+}
+
+function renderRequests() {
+    const pending = requestsData.filter(r => !r.status || r.status === 'pending');
+    const history = requestsData.filter(r => r.status === 'approved' || r.status === 'rejected');
+    document.getElementById('pendingList').innerHTML = pending.length
+        ? pending.map(r => requestItemHtml(r, true)).join('')
+        : `<div class="empty"><i class="fas fa-inbox"></i><h4>ماكو طلبات معلقة</h4><p>أي طلب جديد من السواقين يظهر هنا فوراً</p></div>`;
+    document.getElementById('historyList').innerHTML = history.length
+        ? history.slice(0, 10).map(r => requestItemHtml(r, false)).join('')
+        : `<div class="empty"><i class="fas fa-clock-rotate-left"></i><h4>ماكو سجل بعد</h4><p>الطلبات المعالجة تنحفظ هنا</p></div>`;
+}
+
+window.approveRequest = async function(id) {
+    const r = requestsData.find(x => x.id === id);
+    if (!r) return;
+    if (driversData.some(d => d.phone === r.phone)) { showToast('هذا الرقم موجود بالفعل بالسواق', 'warn'); return; }
+    try {
+        await addDoc(collection(db, 'drivers'), {
+            name: r.name, phone: r.phone, carType: r.carType, carModel: r.carModel,
+            areas: r.areas || [], outTrips: r.outTrips || [], services: r.services || [],
+            available: true, verified: false, rating: 5, ratingCount: 0,
+            deviceId: r.deviceId || ''
+        });
+        await updateDoc(doc(db, 'requests', id), { status: 'approved' });
+        if (r.deviceId) {
+            await addDoc(collection(db, 'notifications'), {
+                title: 'مبروك! طلبك مقبول',
+                body: 'صرت هسة ضمن سواق تطبيق شرقاطنا، والناس تكدر توصل الك مباشرة',
+                target: r.deviceId, type: 'success', createdAt: Date.now()
+            });
+            sendPush('مبروك! طلبك مقبول', 'صرت هسة ضمن سواق تطبيق شرقاطنا', r.deviceId);
+        }
+        showToast('تم قبول السواق ونزل بالتطبيق');
+        refreshAll();
+    } catch (e) { showToast('حدث خطأ أثناء القبول', 'error'); }
+};
+
+window.rejectRequest = async function(id) {
+    const r = requestsData.find(x => x.id === id);
+    if (!r) return;
+    const reason = prompt('اكتب سبب الرفض (راح يشوفه السواق بالتطبيق):');
+    if (reason === null) return;
+    await updateDoc(doc(db, 'requests', id), { status: 'rejected', reason: reason || 'غير محدد' });
+    if (r.deviceId) {
+        await addDoc(collection(db, 'notifications'), {
+            title: 'تحديث على طلبك',
+            body: 'طلبك ما انقبل هالمرة. السبب: ' + (reason || 'غير محدد') + ' .. تكدر تعدل وتعيد الإرسال',
+            target: r.deviceId, type: 'error', createdAt: Date.now()
+        });
+        sendPush('تحديث على طلبك', 'طلبك ما انقبل هالمرة. السبب: ' + (reason || 'غير محدد'), r.deviceId);
+    }
+    showToast('تم رفض الطلب');
+};
+
+/* ===== السواق ===== */
+window.renderDrivers = function() {
+    const q = (document.getElementById('driverSearch').value || '').trim();
+    const list = driversData.filter(d => !q || d.name.includes(q) || (d.carModel || '').includes(q));
+    document.getElementById('driversList').innerHTML = list.length ? list.map(d => `
+        <div class="list-item">
+            <div class="item-head">
+                <div class="item-avatar">${d.name.charAt(0)}</div>
+                <div class="item-head-info">
+                    <h4>${d.name} ${d.verified ? '<span class="badge badge-verified"><i class="fas fa-certificate"></i> موثّق</span>' : ''}</h4>
+                    <p><i class="fas fa-star" style="color:var(--accent)"></i> ${d.rating || 0} (${d.ratingCount || 0} تقييم)</p>
+                </div>
+                <span class="badge ${d.available ? 'badge-on' : 'badge-off'}">${d.available ? 'متاح' : 'غير متاح'}</span>
+            </div>
+            <div class="item-details">
+                <div class="detail-row"><i class="fas fa-phone"></i> <span style="direction:ltr">${d.phone}</span></div>
+                <div class="detail-row"><i class="fas fa-car"></i> ${d.carModel || d.carType}</div>
+                <div class="detail-row"><i class="fas fa-map-location-dot"></i><div class="tags">${(d.areas || []).map(a => `<span class="tag">${a}</span>`).join('') || 'غير محدد'}</div></div>
+                ${(d.outTrips || []).length ? `<div class="detail-row"><i class="fas fa-road"></i><div class="tags">${d.outTrips.map(o => `<span class="tag out">${o}</span>`).join('')}</div></div>` : ''}
+                ${(d.services || []).length ? `<div class="detail-row"><i class="fas fa-concierge-bell"></i><div class="tags">${d.services.map(s => `<span class="tag svc">${s}</span>`).join('')}</div></div>` : ''}
+            </div>
+            <div class="item-actions">
+                <button class="act-btn act-edit" onclick="editDriver('${d.id}')"><i class="fas fa-pen"></i> تعديل</button>
+                <button class="act-btn act-toggle ${d.available ? '' : 'off'}" onclick="toggleDriver('${d.id}')"><i class="fas fa-power-off"></i> ${d.available ? 'إيقاف' : 'تفعيل'}</button>
+                <button class="act-btn act-del" onclick="deleteDriver('${d.id}')"><i class="fas fa-trash"></i> حذف</button>
+            </div>
+        </div>`).join('')
+        : `<div class="empty"><i class="fas fa-users"></i><h4>ماكو سواق</h4><p>اضغط زر الإضافة بالأسفل</p></div>`;
+};
+
+window.openDriverModal = function() {
+    document.getElementById('driverId').value = '';
+    document.getElementById('driverModalTitle').textContent = 'إضافة سواق جديد';
+    ['driverName','driverPhone','driverCarModel'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('driverRating').value = 5;
+    document.getElementById('driverAvailable').value = 'true';
+    document.getElementById('driverVerified').value = 'false';
+    document.getElementById('driverCarType').innerHTML = carsData.map(c => `<option value="${c.name}">${c.name}</option>`).join('');
+    document.getElementById('driverAreas').innerHTML = areasData.map(a => `<label class="check-item"><input type="checkbox" name="dAreas" value="${a.name}"> ${a.name}</label>`).join('');
+    document.getElementById('driverOutTrips').innerHTML = OUT_TRIPS.map(o => `<label class="check-item"><input type="checkbox" name="dOut" value="${o}"> ${o}</label>`).join('');
+    document.getElementById('driverServices').innerHTML = SERVICES.map(s => `<label class="check-item"><input type="checkbox" name="dSvc" value="${s}"> ${s}</label>`).join('');
+    document.getElementById('driverModal').classList.add('active');
+};
+
+window.editDriver = function(id) {
+    const d = driversData.find(x => x.id === id);
+    if (!d) return;
+    document.getElementById('driverId').value = d.id;
+    document.getElementById('driverModalTitle').textContent = 'تعديل بيانات السواق';
+    document.getElementById('driverName').value = d.name;
+    document.getElementById('driverPhone').value = d.phone;
+    document.getElementById('driverCarModel').value = d.carModel || '';
+    document.getElementById('driverRating').value = d.rating || 5;
+    document.getElementById('driverAvailable').value = d.available ? 'true' : 'false';
+    document.getElementById('driverVerified').value = d.verified ? 'true' : 'false';
+    document.getElementById('driverCarType').innerHTML = carsData.map(c => `<option value="${c.name}" ${c.name === d.carType ? 'selected' : ''}>${c.name}</option>`).join('');
+    document.getElementById('driverAreas').innerHTML = areasData.map(a => `<label class="check-item"><input type="checkbox" name="dAreas" value="${a.name}" ${(d.areas || []).includes(a.name) ? 'checked' : ''}> ${a.name}</label>`).join('');
+    document.getElementById('driverOutTrips').innerHTML = OUT_TRIPS.map(o => `<label class="check-item"><input type="checkbox" name="dOut" value="${o}" ${(d.outTrips || []).includes(o) ? 'checked' : ''}> ${o}</label>`).join('');
+    document.getElementById('driverServices').innerHTML = SERVICES.map(s => `<label class="check-item"><input type="checkbox" name="dSvc" value="${s}" ${(d.services || []).includes(s) ? 'checked' : ''}> ${s}</label>`).join('');
+    document.getElementById('driverModal').classList.add('active');
+};
+
+window.saveDriver = async function(e) {
+    e.preventDefault();
+    const id = document.getElementById('driverId').value;
+    const data = {
+        name: document.getElementById('driverName').value.trim(),
+        phone: document.getElementById('driverPhone').value.trim(),
+        carType: document.getElementById('driverCarType').value,
+        carModel: document.getElementById('driverCarModel').value.trim(),
+        available: document.getElementById('driverAvailable').value === 'true',
+        verified: document.getElementById('driverVerified').value === 'true',
+        areas: Array.from(document.querySelectorAll('input[name="dAreas"]:checked')).map(c => c.value),
+        outTrips: Array.from(document.querySelectorAll('input[name="dOut"]:checked')).map(c => c.value),
+        services: Array.from(document.querySelectorAll('input[name="dSvc"]:checked')).map(c => c.value)
+    };
+    if (!id) { data.rating = parseFloat(document.getElementById('driverRating').value) || 0; data.ratingCount = 0; }
+    try {
+        if (id) await updateDoc(doc(db, 'drivers', id), data);
+        else await addDoc(collection(db, 'drivers'), data);
+        document.getElementById('driverModal').classList.remove('active');
+        showToast(id ? 'تم تعديل السواق' : 'تمت إضافة السواق');
+        refreshAll();
+    } catch (err) { showToast('حدث خطأ أثناء الحفظ', 'error'); }
+};
+
+window.toggleDriver = async function(id) {
+    const d = driversData.find(x => x.id === id);
+    if (!d) return;
+    await updateDoc(doc(db, 'drivers', id), { available: !d.available });
+    showToast(d.available ? 'تم إيقاف السواق' : 'تم تفعيل السواق');
+    refreshAll();
+};
+window.deleteDriver = async function(id) {
+    if (!confirm('هل أنت متأكد من حذف هذا السواق؟')) return;
+    await deleteDoc(doc(db, 'drivers', id));
+    showToast('تم حذف السواق'); refreshAll();
+};
+
+function renderAreas() {
+    document.getElementById('areasList').innerHTML = areasData.length ? areasData.map(a => {
+        const count = driversData.filter(d => (d.areas || []).includes(a.name)).length;
+        return `<div class="list-item"><div class="item-head"><div class="item-avatar orange"><i class="fas fa-location-dot"></i></div><div class="item-head-info"><h4>${a.name}</h4><p>${count} سواق يغطي المنطقة</p></div><button class="act-btn act-del" style="flex:none;padding:9px 14px" onclick="deleteArea('${a.id}')"><i class="fas fa-trash"></i></button></div></div>`;
+    }).join('') : `<div class="empty"><i class="fas fa-map-location-dot"></i><h4>ماكو مناطق</h4><p>أضف مناطق الشرقاط من زر الإضافة</p></div>`;
+}
+window.saveArea = async function(e) {
+    e.preventDefault();
+    const name = document.getElementById('areaName').value.trim();
+    if (areasData.some(a => a.name === name)) { showToast('المنطقة موجودة مسبقاً', 'warn'); return; }
+    await addDoc(collection(db, 'areas'), { name });
+    document.getElementById('areaModal').classList.remove('active');
+    document.getElementById('areaName').value = '';
+    showToast('تمت إضافة المنطقة'); refreshAll();
+};
+window.deleteArea = async function(id) {
+    if (!confirm('حذف هذه المنطقة؟')) return;
+    await deleteDoc(doc(db, 'areas', id));
+    showToast('تم حذف المنطقة'); refreshAll();
+};
+
+function renderCars() {
+    document.getElementById('carsList').innerHTML = carsData.length ? carsData.map(c => {
+        const count = driversData.filter(d => d.carType === c.name).length;
+        return `<div class="list-item"><div class="item-head"><div class="item-avatar"><i class="fas ${c.icon || 'fa-car'}"></i></div><div class="item-head-info"><h4>${c.name}</h4><p>${count} سواق بهذا النوع</p></div><button class="act-btn act-del" style="flex:none;padding:9px 14px" onclick="deleteCar('${c.id}')"><i class="fas fa-trash"></i></button></div></div>`;
+    }).join('') : `<div class="empty"><i class="fas fa-car"></i><h4>ماكو أنواع سيارات</h4><p>أضف الأنواع من زر الإضافة</p></div>`;
+}
+window.saveCar = async function(e) {
+    e.preventDefault();
+    const name = document.getElementById('carName').value.trim();
+    if (carsData.some(c => c.name === name)) { showToast('النوع موجود مسبقاً', 'warn'); return; }
+    await addDoc(collection(db, 'carTypes'), { name, icon: document.getElementById('carIcon').value });
+    document.getElementById('carModal').classList.remove('active');
+    document.getElementById('carName').value = '';
+    showToast('تمت إضافة النوع'); refreshAll();
+};
+window.deleteCar = async function(id) {
+    if (!confirm('حذف هذا النوع؟')) return;
+    await deleteDoc(doc(db, 'carTypes', id));
+    showToast('تم حذف النوع'); refreshAll();
+};
+
+document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }));
+</script>
+</body>
+</html>
