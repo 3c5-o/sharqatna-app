@@ -10,7 +10,7 @@ const variants = [
 
 for (const variant of variants) {
   const base = path.join(root, 'apps', variant.name);
-  const source = path.join(base, 'www', 'assets', 'icon-master.png');
+  const source = path.join(base, 'www', 'assets', 'icons', 'icon-512.png');
   const res = path.join(base, 'android', 'app', 'src', 'main', 'res');
   if (!fs.existsSync(source) || !fs.existsSync(res)) continue;
 
