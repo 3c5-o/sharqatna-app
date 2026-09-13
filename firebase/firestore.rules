@@ -1,0 +1,64 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+    function validPhone(phone) { return phone is string && phone.matches('^07[0-9]{9}$'); }
+
+    match /drivers/{driverId} {
+      allow read: if true;
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin() || (signedIn()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['rating', 'ratingCount'])
+        && request.resource.data.ratingCount == resource.data.ratingCount + 1
+        && request.resource.data.rating >= 1
+        && request.resource.data.rating <= 5
+        && getAfter(/databases/$(database)/documents/ratings/$(request.auth.uid + '_' + driverId)).data.userUid == request.auth.uid);
+    }
+    match /areas/{areaId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /carTypes/{carId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    match /requests/{requestId} {
+      allow create: if signedIn()
+        && request.resource.data.ownerUid == request.auth.uid
+        && validPhone(request.resource.data.phone)
+        && request.resource.data.status == 'pending';
+      allow read: if isAdmin() || (signedIn() && resource.data.ownerUid == request.auth.uid);
+      allow update: if isAdmin() || (signedIn()
+        && resource.data.ownerUid == request.auth.uid
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.status == 'pending');
+      allow delete: if isAdmin();
+    }
+    match /ratings/{ratingId} {
+      allow read: if true;
+      allow create: if signedIn()
+        && ratingId == request.auth.uid + '_' + request.resource.data.driverId
+        && request.resource.data.value is int
+        && request.resource.data.value >= 1
+        && request.resource.data.value <= 5;
+      allow update, delete: if false;
+    }
+    match /notifications/{notificationId} {
+      allow create, update, delete: if isAdmin();
+      allow read: if isAdmin() || (signedIn() &&
+        (resource.data.target == 'all' || resource.data.target == request.auth.uid));
+    }
+    match /pushQueue/{messageId} {
+      allow create: if isAdmin() && request.resource.data.createdBy == request.auth.uid;
+      allow read: if isAdmin();
+      allow update, delete: if false;
+    }
+    match /admins/{uid} {
+      allow read: if signedIn() && uid == request.auth.uid;
+      allow write: if false;
+    }
+  }
+}
